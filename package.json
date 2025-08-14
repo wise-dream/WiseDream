@@ -1,7 +1,9 @@
 {
-  "name": "nuxt-app",
+  "name": "WiseDream Portfolio",
   "type": "module",
   "private": true,
+  "version": "1.0.0",
+  "homepage": "https://wisedream.ru",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
