@@ -1,0 +1,514 @@
+{
+  "header": {
+    "brand": "WiseDream",
+    "brandLabel": "WiseDream - Главная",
+    "navigation": {
+      "label": "Основная навигация",
+      "mobileLabel": "Мобильная навигация",
+      "toggleButton": "Переключить мобильное меню"
+    },
+    "links": {
+      "about": "Обо мне",
+      "projects": "Проекты",
+      "stack": "Технологии",
+      "blog": "Блог",
+      "contact": "Связаться",
+      "contactLabel": "Связаться с нами"
+    },
+    "language": {
+      "current": "Текущий язык: {locale}",
+      "switch": "Переключить язык"
+    }
+  },
+  "nav": {
+    "about": "Обо мне",
+    "projects": "Проекты",
+    "stack": "Технологии",
+    "blog": "Блог",
+    "services": "Услуги",
+    "contact": "Связаться"
+  },
+  "hero": {
+    "greeting": "Привет, я",
+    "name": "Винокуров Камил",
+    "subtitle": "Frontend / Full-stack разработчик. Делаю быстрые, чистые и практичные продукты.",
+    "primaryButton": "Смотреть проекты",
+    "secondaryButton": "Связаться"
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Обо мне",
+      "title": "Привет! Я Камил — делаю быстрые интерфейсы и небольшие инструменты, которыми реально пользуются.",
+      "subtitle": "Vue/React, дизайн-системы, SSR, карты, Telegram-боты и немного Go.",
+      "primaryButton": "Проекты",
+      "secondaryButton": "Связаться"
+    },
+    "help": {
+      "eyebrow": "Чем помогаю продукту",
+      "cards": {
+        "0": {
+          "title": "Дизайн-системы без боли",
+          "description": "UI-kit, Storybook, переиспользование"
+        },
+        "1": {
+          "title": "Перф с метриками",
+          "description": "Оптимизации загрузки и интерактива"
+        },
+        "2": {
+          "title": "SSR с Next.js/Nuxt, карты/реалтайм",
+          "description": "Когда это оправдано; маршруты, авторизация, WebSockets"
+        },
+        "3": {
+          "title": "Чистые миграции и легаси",
+          "description": "Плавные переходы, инкрементальные обновления"
+        },
+        "4": {
+          "title": "Telegram-боты",
+          "description": "Бизнес-логика, платежи, мини-приложения, интеграции"
+        },
+        "5": {
+          "title": "PWA для банковских и инфо-сервисов",
+          "description": "Offline-режим, установка на устройство, push-уведомления, перф"
+        }
+      }
+    },
+    "experience": {
+      "eyebrow": "Опыт",
+      "badge": {
+        "work": "Работа",
+        "project": "Проект"
+      },
+      "timeline": [
+        {
+          "kind": "project",
+          "start": "2025-01",
+          "end": "2025-03",
+          "period": "Январь 2025 - Март 2025",
+          "title": "Сайт Чукотки",
+          "org": "NEFU",
+          "description": "Vue + Go. Быстрый релиз за ~2 месяца. Бэкенд на Gin, БД Postrgres",
+          "tags": [
+            "TypeScript",
+            "Vue",
+            "Go",
+            "Gin",
+            "Nginx",
+            "CI/CD"
+          ]
+        },
+        {
+          "kind": "work",
+          "start": "2024-05",
+          "title": "АЭБ АйТи",
+          "role": "Разработчик ПО",
+          "period": "Май 2024 — сейчас",
+          "description": "Дизайн-система и Storybook, миграции на Vue 3/TS, интеграции REST/GraphQL, карты и realtime.",
+          "tags": [
+            "Vue 3",
+            "TypeScript",
+            "Storybook",
+            "Maps",
+            "WebSockets",
+            "PHP",
+            "Angular",
+            "Next.js",
+            "PWA",
+            "SPA"
+          ]
+        },
+        {
+          "kind": "project",
+          "start": "2024-04",
+          "end": "2024-08",
+          "period": "Апрель 2024 - Август 2024",
+          "title": "ChildrenOfAsiaBot",
+          "org": "NEFU",
+          "description": "RU ↔ EN задания, тесты и уроки для мероприятия ChildrenOfAsia. Автопроверка через OPENAI API. Двухъязычный UX.",
+          "tags": [
+            "Aiogram",
+            "OPENAI API",
+            "Python"
+          ]
+        },
+        {
+          "kind": "work",
+          "start": "2023-06",
+          "end": "2024-04",
+          "period": "Июнь 2023 — Апрель 2024",
+          "title": "UnitedB&B",
+          "org": "ООО \"СИВИГ\"",
+          "role": "Fullstack Developer (контракт)",
+          "description": "Сервис бронирования жилья для Крайнего Севера: SSR на Next.js, авторизация/заказы, Docker.",
+          "tags": [
+            "Next.js",
+            "SSR",
+            "Docker",
+            "Python"
+          ]
+        },
+        {
+          "kind": "project",
+          "start": "2023-02",
+          "end": "2023-03",
+          "period": "Февраль 2023 - Март 2023",
+          "title": "Бот зоопарка",
+          "org": "ООО \"Орто Дойду\"",
+          "description": "Информация / навигация и админка. Разработан и сдан за ~1 месяц.",
+          "tags": [
+            "Aiogram",
+            "Python",
+            "Telegram"
+          ]
+        },
+        {
+          "kind": "work",
+          "start": "2022-11",
+          "end": "2023-06",
+          "period": "Ноябрь 2022 — Май 2023",
+          "title": "InRoad",
+          "org": "inDriver SparkLab",
+          "role": "Frontend Developer",
+          "description": "Работа над продуктом InRoad в R&D-подразделении. Компоненты, интеграции, поставка фич.",
+          "tags": [
+            "Vue",
+            "TypeScript",
+            "Google Maps API"
+          ]
+        },
+        {
+          "kind": "project",
+          "start": "2022-09",
+          "end": "2023-05",
+          "period": "Сентябрь 2022 - Май 2023",
+          "title": "Paralar",
+          "org": "NEFU",
+          "description": "Бот расписания СВФУ — быстрый поиск, реальное использование, экономия времени студентов.",
+          "tags": [
+            "Telegram",
+            "Aiogram",
+            "Python"
+          ]
+        }
+      ]
+    },
+    "stack": {
+      "eyebrow": "Технологии и инструменты",
+      "categories": {
+        "0": {
+          "name": "Core",
+          "techs": [
+            "TypeScript",
+            "Go",
+            "Python"
+          ]
+        },
+        "1": {
+          "name": "Frontend",
+          "techs": [
+            "Vue 3 / Nuxt",
+            "React / Next.js",
+            "Angular",
+            "Storybook",
+            "Tailwind CSS",
+            "PWA"
+          ]
+        },
+        "2": {
+          "name": "Backend",
+          "techs": [
+            "Go",
+            "NodeJS",
+            "Prisma",
+            "Gorm",
+            "Gin",
+            "Express"
+          ]
+        },
+        "3": {
+          "name": "API / Сетевое взаимодействие",
+          "techs": [
+            "REST",
+            "GraphQL",
+            "WebSockets"
+          ]
+        },
+        "4": {
+          "name": "Инфраструктура",
+          "techs": [
+            "Vite",
+            "Webpack",
+            "Docker"
+          ]
+        },
+        "5": {
+          "name": "Карты",
+          "techs": [
+            "Google Maps API",
+            "Yandex Maps API"
+          ]
+        },
+        "6": {
+          "name": "UI / качество",
+          "techs": [
+            "Design Systems",
+            "ESLint/Prettier",
+            "Vitest/Playwright"
+          ]
+        }
+      }
+    },
+    "cta": {
+      "title": "Давайте работать вместе",
+      "writeButton": "Написать",
+      "resumeButton": "Скачать резюме",
+      "projectsButton": "Смотреть проекты",
+      "note": "Обычно отвечаю в течение дня"
+    }
+  },
+  "projects": {
+    "hero": {
+      "title": "Проекты",
+      "subtitle": "Подборка недавних работ и кейсов: веб-сайты, боты и PWA."
+    },
+    "filters": {
+      "all": "Все",
+      "web": "Веб",
+      "bot": "Боты"
+    },
+    "search": "Поиск по проектам…",
+    "cta": {
+      "open": "Открыть",
+      "source": "Исходники"
+    },
+    "empty": "По запросу ничего не нашлось.",
+    "statusLabels": {
+      "active": "Запущен",
+      "inprogress": "В процессе",
+      "delivered": "Сдан",
+      "closed": "Закрыт"
+    },
+    "list": {
+      "0": {
+        "title": "Сайт Чукотки",
+        "org": "NEFU",
+        "period": "Январь 2025 — Март 2025",
+        "description": "Информационный сайт: кастомная карта, контент-страницы, админ-панель. Фуллстек на Vue + Go (Gin), SSR/CSR-гибрид, деплой и базовая наблюдаемость.",
+        "status": "delivered",
+        "tags": {
+          "0": "Vue 3",
+          "1": "TypeScript",
+          "2": "Go",
+          "3": "Gin",
+          "4": "PostgreSQL",
+          "5": "Nginx",
+          "6": "CI/CD"
+        }
+      },
+      "1": {
+        "title": "Обучающий портал АЭБ",
+        "org": "AЭБ АйТи",
+        "period": "Ноябрь 2024 — Декабрь 2024",
+        "description": "edu.albank.ru — весь фронтенд, интеграция с бэком, админка, роли и права. Оптимизация производительности и сборки.",
+        "link": "https://edu.albank.ru",
+        "status": "active",
+        "tags": {
+          "0": "Vue 3",
+          "1": "TypeScript",
+          "2": "REST",
+          "3": "Auth",
+          "4": "Admin",
+          "5": "SPA"
+        }
+      },
+      "2": {
+        "title": "Программа лояльности «СВОИ»",
+        "org": "AЭБ АйТи",
+        "period": "Ноябрь 2024 — Декабрь 2024",
+        "link": "https://svoi.albank.ru",
+        "description": "Обновление портала АЭБ. Компоненты дизайн-системы, интеграции с API.",
+        "status": "active",
+        "tags": {
+          "0": "Vue 3",
+          "1": "TypeScript",
+          "2": "Design System",
+          "3": "API",
+          "4": "SPA"
+        }
+      },
+      "3": {
+        "title": "Сайт КЖЯ",
+        "org": "AЭБ АйТи",
+        "period": "Декабрь 2024 — Февраль 2025",
+        "link": "https://card.sakha.gov.ru/",
+        "description": "Сайт Карты Жителя Якутии. Интеграция с API КЖЯ.",
+        "status": "active",
+        "tags": {
+          "0": "Next.js",
+          "1": "REST API",
+          "2": "TypeScript",
+          "3": "Yandex Maps API"
+        }
+      },
+      "4": {
+        "title": "PWA банковского приложения",
+        "org": "AЭБ АйТи",
+        "period": "Май 2025 — сейчас",
+        "description": "Проработка PWA: офлайн-режим, установка на устройство, push-уведомления, стратегия кеширования и метрики перфоманса.",
+        "status": "inprogress",
+        "tags": {
+          "0": "PWA",
+          "1": "Service Worker",
+          "2": "Angular",
+          "3": "TypeScript",
+          "4": "Vite"
+        }
+      },
+      "5": {
+        "title": "UnitedB&B — сервис бронирования",
+        "org": "ООО «СИВИГ»",
+        "period": "Июнь 2023 — Апрель 2024",
+        "description": "Сервис бронирования для Крайнего Севера: SSR на Next.js, авторизация, заказ-флоу, Docker-окружение.",
+        "status": "closed",
+        "tags": {
+          "0": "Next.js",
+          "1": "SSR",
+          "2": "Docker",
+          "3": "TypeScript",
+          "4": "Python"
+        }
+      },
+      "6": {
+        "title": "ChildrenOfAsiaBot",
+        "org": "NEFU",
+        "period": "Апрель 2024 — Август 2024",
+        "description": "RU ↔ EN задания, тесты и уроки для мероприятия. Автопроверка через OpenAI API, двухъязычный UX.",
+        "status": "delivered",
+        "tags": {
+          "0": "Telegram",
+          "1": "Aiogram",
+          "2": "Python",
+          "3": "OpenAI API"
+        }
+      },
+      "7": {
+        "title": "Бот зоопарка",
+        "org": "ООО «Орто Дойду»",
+        "period": "Февраль 2023 — Март 2023",
+        "description": "Информационный бот: ответы, навигация, базовая админка. Разработан и сдан ≈ за месяц.",
+        "status": "delivered",
+        "tags": {
+          "0": "Telegram",
+          "1": "Aiogram",
+          "2": "Python"
+        }
+      },
+      "8": {
+        "title": "Paralar",
+        "org": "NEFU",
+        "period": "Сентябрь 2022 — Май 2023 (в эксплуатации)",
+        "description": "Бот расписания СВФУ: быстрый поиск расписаний, кеширование, реальное использование студентами.",
+        "status": "active",
+        "tags": {
+          "0": "Telegram",
+          "1": "Aiogram",
+          "2": "Python",
+          "3": "Cache"
+        }
+      },
+      "9": {
+        "title": "InRoad (R&D)",
+        "org": "inDriver SparkLab",
+        "period": "Ноябрь 2022 — Май 2023",
+        "description": "Фронтенд-разработка в R&D: компоненты, интеграции, работа с картами и потоком фич.",
+        "status": "closed",
+        "tags": {
+          "0": "Vue",
+          "1": "TypeScript",
+          "2": "Google Maps API"
+        }
+      }
+    }
+  },
+  "services": {
+    "hero": {
+      "eyebrow": "Услуги",
+      "title": "Разрабатываю и запускаю продукты",
+      "subtitle": "От Telegram-ботов до полноценных веб-приложений с админкой. Акцент на скорость, UX и измеримую производительность."
+    },
+    "cards": {
+      "0": {
+        "title": "Telegram-бот под задачу",
+        "desc": "Проектирую и разрабатываю ботов: от простых консультантов до мини-приложений с платежами и админкой.",
+        "bullets": {
+          "0": "Диалоги, меню, роль-модель",
+          "1": "Платежи/подписки, веб-хуки",
+          "2": "Мини-апп, интеграции с API",
+          "3": "Админ-панель и модерация",
+          "4": "Мониторинг и логирование"
+        }
+      },
+      "1": {
+        "title": "Сайт под ключ с админкой",
+        "desc": "Корпоративные/информационные сайты, лендинги и порталы. Админ-панель, роли и права, SSR/CSR по потребности.",
+        "bullets": {
+          "0": "Nuxt/Next, SSR/CSR-гибрид",
+          "1": "Админка: контент, роли, доступы",
+          "2": "Кастомные карты, поиск, фильтры",
+          "3": "CI/CD и деплой",
+          "4": "Метрики перфоманса (LCP/TTI)"
+        }
+      },
+      "2": {
+        "title": "Верстка и фронтенд",
+        "desc": "Чистая UI-верстка, компоненты, дизайн-система, Storybook. Оптимизация бандла и времени до интерактива.",
+        "bullets": {
+          "0": "Компоненты и UI-кит",
+          "1": "Storybook и документация",
+          "2": "Адаптив и доступность (a11y)",
+          "3": "Tailwind/SCSS, TypeScript",
+          "4": "Perf-оптимизации и код-ревью"
+        }
+      },
+      "3": {
+        "title": "PWA, SSR и производительность",
+        "desc": "Делаю веб-приложения ближе к нативным: офлайн, установка на устройство, быстрая первая отрисовка.",
+        "bullets": {
+          "0": "Service Worker, офлайн-кеш",
+          "1": "App Manifest и установка",
+          "2": "SSR/SSG там, где нужно",
+          "3": "Анализ и бюджет перфоманса",
+          "4": "Мониторинг и оповещения"
+        }
+      }
+    },
+    "cta": {
+      "primary": "Обсудить задачу",
+      "secondary": "Смотреть проекты"
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Связаться",
+      "subtitle": "Пишите в Telegram или на почту — обычно отвечаю в течение дня."
+    },
+    "channels": {
+      "telegram": {
+        "title": "Telegram",
+        "desc": "Быстрее всего отвечаю тут.",
+        "cta": "Открыть чат"
+      },
+      "email": {
+        "title": "Email",
+        "desc": "Для предложений и брифов — можно приложить ТЗ или ссылки.",
+        "cta": "Написать письмо",
+        "copied": "Скопировано",
+        "copyLabel": "Скопировать адрес"
+      }
+    },
+    "socials": {
+      "githubAria": "GitHub",
+      "linkedinAria": "LinkedIn"
+    },
+    "mailtoSubject": "Привет из портфолио"
+  }
+}

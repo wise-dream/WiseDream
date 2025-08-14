@@ -1,0 +1,514 @@
+{
+  "header": {
+    "brand": "WiseDream",
+    "brandLabel": "WiseDream - Inicio",
+    "navigation": {
+      "label": "Navegación principal",
+      "mobileLabel": "Navegación móvil",
+      "toggleButton": "Alternar menú móvil"
+    },
+    "links": {
+      "about": "Sobre mí",
+      "projects": "Proyectos",
+      "stack": "Tecnologías",
+      "blog": "Blog",
+      "contact": "Contacto",
+      "contactLabel": "Contactar"
+    },
+    "language": {
+      "current": "Idioma actual: {locale}",
+      "switch": "Cambiar idioma"
+    }
+  },
+  "nav": {
+    "about": "Sobre mí",
+    "projects": "Proyectos",
+    "stack": "Tecnologías",
+    "blog": "Blog",
+    "services": "Servicios",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Vinokurov Kamil",
+    "subtitle": "Desarrollador Frontend / Full-stack. Creo productos rápidos, limpios y prácticos.",
+    "primaryButton": "Ver Proyectos",
+    "secondaryButton": "Contactar"
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Sobre mí",
+      "title": "¡Hola! Soy Kamil — hago interfaces rápidas y herramientas pequeñas que la gente realmente usa.",
+      "subtitle": "Vue/React, sistemas de diseño, SSR, mapas, bots de Telegram y un poco de Go.",
+      "primaryButton": "Proyectos",
+      "secondaryButton": "Contactar"
+    },
+    "help": {
+      "eyebrow": "Cómo ayudo a los productos",
+      "cards": {
+        "0": {
+          "title": "Sistemas de diseño sin dolor",
+          "description": "UI-kit, Storybook, reutilización"
+        },
+        "1": {
+          "title": "Rendimiento con métricas",
+          "description": "Optimizaciones de carga e interacción"
+        },
+        "2": {
+          "title": "SSR con Next.js/Nuxt, mapas/tiempo real",
+          "description": "Cuando tiene sentido; enrutamiento, autorización, WebSockets"
+        },
+        "3": {
+          "title": "Migraciones limpias y legacy",
+          "description": "Transiciones suaves, actualizaciones incrementales"
+        },
+        "4": {
+          "title": "Bots de Telegram",
+          "description": "Lógica de negocio, pagos, mini-aplicaciones, integraciones"
+        },
+        "5": {
+          "title": "PWA para servicios bancarios e informativos",
+          "description": "Modo offline, instalación en dispositivo, notificaciones push, rendimiento"
+        }
+      }
+    },
+    "experience": {
+      "eyebrow": "Experiencia",
+      "badge": {
+        "work": "Trabajo",
+        "project": "Proyecto"
+      },
+      "timeline": [
+        {
+          "kind": "project",
+          "start": "2025-01",
+          "end": "2025-03",
+          "period": "Enero 2025 - Marzo 2025",
+          "title": "Sitio de Chukotka",
+          "org": "NEFU",
+          "description": "Vue + Go. Lanzamiento rápido en ~2 meses. Backend en Gin, base de datos PostgreSQL",
+          "tags": [
+            "TypeScript",
+            "Vue",
+            "Go",
+            "Gin",
+            "Nginx",
+            "CI/CD"
+          ]
+        },
+        {
+          "kind": "work",
+          "start": "2024-05",
+          "title": "AEB IT",
+          "role": "Desarrollador de Software",
+          "period": "Mayo 2024 — ahora",
+          "description": "Sistema de diseño y Storybook, migraciones a Vue 3/TS, integraciones REST/GraphQL, mapas y tiempo real.",
+          "tags": [
+            "Vue 3",
+            "TypeScript",
+            "Storybook",
+            "Maps",
+            "WebSockets",
+            "PHP",
+            "Angular",
+            "Next.js",
+            "PWA",
+            "SPA"
+          ]
+        },
+        {
+          "kind": "project",
+          "start": "2024-04",
+          "end": "2024-08",
+          "period": "Abril 2024 - Agosto 2024",
+          "title": "ChildrenOfAsiaBot",
+          "org": "NEFU",
+          "description": "Tareas/pruebas/lecciones RU ↔ EN para evento ChildrenOfAsia. Verificación automática vía OPENAI API. UX bilingüe.",
+          "tags": [
+            "Aiogram",
+            "OPENAI API",
+            "Python"
+          ]
+        },
+        {
+          "kind": "work",
+          "start": "2023-06",
+          "end": "2024-04",
+          "period": "Junio 2023 — Abril 2024",
+          "title": "UnitedB&B",
+          "org": "LLC \"SIVIG\"",
+          "role": "Fullstack Developer (contrato)",
+          "description": "Servicio de reserva de viviendas para el Extremo Norte: SSR en Next.js, autorización/pedidos, Docker.",
+          "tags": [
+            "Next.js",
+            "SSR",
+            "Docker",
+            "Python"
+          ]
+        },
+        {
+          "kind": "project",
+          "start": "2023-02",
+          "end": "2023-03",
+          "period": "Febrero 2023 - Marzo 2023",
+          "title": "Bot del zoológico",
+          "org": "LLC \"Orto Doydu\"",
+          "description": "Información / navegación y panel de administración. Desarrollado y entregado en ~1 mes.",
+          "tags": [
+            "Aiogram",
+            "Python",
+            "Telegram"
+          ]
+        },
+        {
+          "kind": "work",
+          "start": "2022-11",
+          "end": "2023-06",
+          "period": "Noviembre 2022 — Mayo 2023",
+          "title": "InRoad",
+          "org": "inDriver SparkLab",
+          "role": "Frontend Developer",
+          "description": "Trabajo en el producto InRoad en la división R&D. Componentes, integraciones, entrega de funcionalidades.",
+          "tags": [
+            "Vue",
+            "TypeScript",
+            "Google Maps API"
+          ]
+        },
+        {
+          "kind": "project",
+          "start": "2022-09",
+          "end": "2023-05",
+          "period": "Septiembre 2022 - Mayo 2023",
+          "title": "Paralar",
+          "org": "NEFU",
+          "description": "Bot de horarios SVFU — búsqueda rápida, uso real, ahorra tiempo de estudiantes.",
+          "tags": [
+            "Telegram",
+            "Aiogram",
+            "Python"
+          ]
+        }
+      ]
+    },
+    "stack": {
+      "eyebrow": "Tecnologías y Herramientas",
+      "categories": {
+        "0": {
+          "name": "Core",
+          "techs": [
+            "TypeScript",
+            "Go",
+            "Python"
+          ]
+        },
+        "1": {
+          "name": "Frontend",
+          "techs": [
+            "Vue 3 / Nuxt",
+            "React / Next.js",
+            "Angular",
+            "Storybook",
+            "Tailwind CSS",
+            "PWA"
+          ]
+        },
+        "2": {
+          "name": "Backend",
+          "techs": [
+            "Go",
+            "NodeJS",
+            "Prisma",
+            "Gorm",
+            "Gin",
+            "Express"
+          ]
+        },
+        "3": {
+          "name": "API / Redes",
+          "techs": [
+            "REST",
+            "GraphQL",
+            "WebSockets"
+          ]
+        },
+        "4": {
+          "name": "Infraestructura",
+          "techs": [
+            "Vite",
+            "Webpack",
+            "Docker"
+          ]
+        },
+        "5": {
+          "name": "Mapas",
+          "techs": [
+            "Google Maps API",
+            "Yandex Maps API"
+          ]
+        },
+        "6": {
+          "name": "UI / Calidad",
+          "techs": [
+            "Sistemas de Diseño",
+            "ESLint/Prettier",
+            "Vitest/Playwright"
+          ]
+        }
+      }
+    },
+    "cta": {
+      "title": "Trabajemos juntos",
+      "writeButton": "Escribir",
+      "resumeButton": "Descargar CV",
+      "projectsButton": "Ver Proyectos",
+      "note": "Suelo responder en un día"
+    }
+  },
+  "projects": {
+    "hero": {
+      "title": "Proyectos",
+      "subtitle": "Una selección de trabajos recientes y casos: sitios web, bots y PWA."
+    },
+    "filters": {
+      "all": "Todos",
+      "web": "Web",
+      "bot": "Bots"
+    },
+    "search": "Buscar proyectos…",
+    "cta": {
+      "open": "Abrir",
+      "source": "Código"
+    },
+    "empty": "No se encontró nada para tu búsqueda.",
+    "statusLabels": {
+      "active": "Activo",
+      "inprogress": "En Progreso",
+      "delivered": "Entregado",
+      "closed": "Cerrado"
+    },
+    "list": {
+      "0": {
+        "title": "Sitio de Chukotka",
+        "org": "NEFU",
+        "period": "Enero 2025 — Marzo 2025",
+        "description": "Sitio informativo: mapa personalizado, páginas de contenido, panel de administración. Fullstack en Vue + Go (Gin), híbrido SSR/CSR, despliegue y observabilidad básica.",
+        "status": "delivered",
+        "tags": {
+          "0": "Vue 3",
+          "1": "TypeScript",
+          "2": "Go",
+          "3": "Gin",
+          "4": "PostgreSQL",
+          "5": "Nginx",
+          "6": "CI/CD"
+        }
+      },
+      "1": {
+        "title": "Portal de Aprendizaje AEB",
+        "org": "AEB IT",
+        "period": "Noviembre 2024 — Diciembre 2024",
+        "description": "edu.albank.ru — frontend completo, integración backend, panel de administración, roles y permisos. Optimización de rendimiento y build.",
+        "link": "https://edu.albank.ru",
+        "status": "active",
+        "tags": {
+          "0": "Vue 3",
+          "1": "TypeScript",
+          "2": "REST",
+          "3": "Auth",
+          "4": "Admin",
+          "5": "SPA"
+        }
+      },
+      "2": {
+        "title": "Programa de Lealtad \"SVOI\"",
+        "org": "AEB IT",
+        "period": "Noviembre 2024 — Diciembre 2024",
+        "link": "https://svoi.albank.ru",
+        "description": "Actualización del portal AEB. Componentes del sistema de diseño, integraciones API.",
+        "status": "active",
+        "tags": {
+          "0": "Vue 3",
+          "1": "TypeScript",
+          "2": "Design System",
+          "3": "API",
+          "4": "SPA"
+        }
+      },
+      "3": {
+        "title": "Sitio KZhYa",
+        "org": "AEB IT",
+        "period": "Diciembre 2024 — Febrero 2025",
+        "link": "https://card.sakha.gov.ru/",
+        "description": "Sitio de la Tarjeta de Residente de Yakutia. Integración con API KZhYa.",
+        "status": "active",
+        "tags": {
+          "0": "Next.js",
+          "1": "REST API",
+          "2": "TypeScript",
+          "3": "Yandex Maps API"
+        }
+      },
+      "4": {
+        "title": "PWA de Aplicación Bancaria",
+        "org": "AEB IT",
+        "period": "Mayo 2025 — ahora",
+        "description": "Desarrollo PWA: modo offline, instalación en dispositivo, notificaciones push, estrategia de caché y métricas de rendimiento.",
+        "status": "inprogress",
+        "tags": {
+          "0": "PWA",
+          "1": "Service Worker",
+          "2": "Angular",
+          "3": "TypeScript",
+          "4": "Vite"
+        }
+      },
+      "5": {
+        "title": "UnitedB&B — Servicio de Reservas",
+        "org": "LLC \"SIVIG\"",
+        "period": "Junio 2023 — Abril 2024",
+        "description": "Servicio de reservas para el Extremo Norte: SSR en Next.js, autorización, flujo de pedidos, entorno Docker.",
+        "status": "closed",
+        "tags": {
+          "0": "Next.js",
+          "1": "SSR",
+          "2": "Docker",
+          "3": "TypeScript",
+          "4": "Python"
+        }
+      },
+      "6": {
+        "title": "ChildrenOfAsiaBot",
+        "org": "NEFU",
+        "period": "Abril 2024 — Agosto 2024",
+        "description": "RU ↔ EN tareas, pruebas y lecciones para el evento. Verificación automática a través de OpenAI API, UX bilingüe.",
+        "status": "delivered",
+        "tags": {
+          "0": "Telegram",
+          "1": "Aiogram",
+          "2": "Python",
+          "3": "OpenAI API"
+        }
+      },
+      "7": {
+        "title": "Bot del Zoológico",
+        "org": "LLC \"Orto Doydu\"",
+        "period": "Febrero 2023 — Marzo 2023",
+        "description": "Bot informativo: respuestas, navegación, panel de administración básico. Desarrollado y entregado en ≈1 mes.",
+        "status": "delivered",
+        "tags": {
+          "0": "Telegram",
+          "1": "Aiogram",
+          "2": "Python"
+        }
+      },
+      "8": {
+        "title": "Paralar",
+        "org": "NEFU",
+        "period": "Septiembre 2022 — Mayo 2023 (en producción)",
+        "description": "Bot de horarios SVFU: búsqueda rápida de horarios, caché, uso real por estudiantes.",
+        "status": "active",
+        "tags": {
+          "0": "Telegram",
+          "1": "Aiogram",
+          "2": "Python",
+          "3": "Cache"
+        }
+      },
+      "9": {
+        "title": "InRoad (R&D)",
+        "org": "inDriver SparkLab",
+        "period": "Noviembre 2022 — Mayo 2023",
+        "description": "Desarrollo frontend en R&D: componentes, integraciones, trabajo con mapas y flujo de funcionalidades.",
+        "status": "closed",
+        "tags": {
+          "0": "Vue",
+          "1": "TypeScript",
+          "2": "Google Maps API"
+        }
+      }
+    }
+  },
+  "services": {
+    "hero": {
+      "eyebrow": "Servicios",
+      "title": "Desarrollo y lanzo productos",
+      "subtitle": "Desde bots de Telegram hasta aplicaciones web completas con panel de administración. Enfoque en velocidad, UX y rendimiento medible."
+    },
+    "cards": {
+      "0": {
+        "title": "Bot de Telegram para tu tarea",
+        "desc": "Diseño y desarrollo bots: desde consultores simples hasta mini-aplicaciones con pagos y panel de administración.",
+        "bullets": {
+          "0": "Diálogos, menús, modelo de roles",
+          "1": "Pagos/suscripciones, webhooks",
+          "2": "Mini-app, integraciones con API",
+          "3": "Panel de administración y moderación",
+          "4": "Monitoreo y registro"
+        }
+      },
+      "1": {
+        "title": "Sitio web llave en mano con panel de administración",
+        "desc": "Sitios web corporativos/informativos, páginas de aterrizaje y portales. Panel de administración, roles y permisos, SSR/CSR según necesidad.",
+        "bullets": {
+          "0": "Nuxt/Next, híbrido SSR/CSR",
+          "1": "Admin: contenido, roles, acceso",
+          "2": "Mapas personalizados, búsqueda, filtros",
+          "3": "CI/CD y despliegue",
+          "4": "Métricas de rendimiento (LCP/TTI)"
+        }
+      },
+      "2": {
+        "title": "Maquetación y frontend",
+        "desc": "Maquetación UI limpia, componentes, sistema de diseño, Storybook. Optimización de bundle y tiempo hasta interactividad.",
+        "bullets": {
+          "0": "Componentes y kit UI",
+          "1": "Storybook y documentación",
+          "2": "Responsive y accesibilidad (a11y)",
+          "3": "Tailwind/SCSS, TypeScript",
+          "4": "Optimizaciones de rendimiento y revisión de código"
+        }
+      },
+      "3": {
+        "title": "PWA, SSR y rendimiento",
+        "desc": "Hago aplicaciones web más cercanas a nativas: offline, instalación en dispositivo, renderizado rápido inicial.",
+        "bullets": {
+          "0": "Service Worker, caché offline",
+          "1": "App Manifest e instalación",
+          "2": "SSR/SSG donde sea necesario",
+          "3": "Análisis y presupuesto de rendimiento",
+          "4": "Monitoreo y alertas"
+        }
+      }
+    },
+    "cta": {
+      "primary": "Discutir tarea",
+      "secondary": "Ver proyectos"
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Contacto",
+      "subtitle": "Escribe en Telegram o por correo — normalmente respondo en un día."
+    },
+    "channels": {
+      "telegram": {
+        "title": "Telegram",
+        "desc": "Respondo más rápido aquí.",
+        "cta": "Abrir chat"
+      },
+      "email": {
+        "title": "Email",
+        "desc": "Para propuestas y briefings — puedes adjuntar especificaciones o enlaces.",
+        "cta": "Escribir email",
+        "copied": "Copiado",
+        "copyLabel": "Copiar dirección"
+      }
+    },
+    "socials": {
+      "githubAria": "GitHub",
+      "linkedinAria": "LinkedIn"
+    },
+    "mailtoSubject": "Hola desde el portfolio"
+  }
+}
