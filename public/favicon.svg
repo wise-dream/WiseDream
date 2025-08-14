@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="900"
+   height="900"
+   viewBox="0 0 238.125 238.125"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (86a8ad7, 2024-10-11)"
+   sodipodi:docname="favicon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <!-- Адаптация под светлую/тёмную тему -->
+  <style
+     id="style1">
+    /* сообщает браузеру, что и светлая, и тёмная схемы поддерживаются */
+    :root { color-scheme: light dark; }
+
+    /* по умолчанию (light) — тёмный штрих; в тёмной теме — светлый */
+    :root { color: #111; }
+    @media (prefers-color-scheme: dark) {
+      :root { color: #fff; }
+    }
+
+    /* stroke берётся из currentColor */
+    .fg { stroke: currentColor; fill: none; }
+  </style>
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="true"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="0.74208053"
+     inkscape:cx="396.8572"
+     inkscape:cy="368.55838"
+     inkscape:window-width="1920"
+     inkscape:window-height="1051"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path1"
+       class="fg"
+       style="stroke-width:25.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none"
+       d="M 175.49019,161.53561 131.58096,237.54503 86.97752,197.60136 43.800251,237.52323 -0.07122532,161.49201 43.838004,85.48259 l 87.780706,0.0218 z"
+       transform="translate(31.35302,-42.451309)"
+       sodipodi:nodetypes="cccccccc" />
+  </g>
+</svg>

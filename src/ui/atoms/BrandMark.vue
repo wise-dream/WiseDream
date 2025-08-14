@@ -6,6 +6,7 @@ const localePath = useLocalePath()
 
 <template>
   <NuxtLink :to="localePath('/')" class="inline-flex items-center gap-2 no-underline text-fg hover:text-accent transition-colors" :aria-label="t('header.brandLabel')">
+    <img src="/favicon.svg" alt="WiseDream" class="w-6 h-6" />
     <span class="text-[1.125rem] leading-7 font-semibold tracking-[-0.01em]">{{ t('header.brand') }}</span>
   </NuxtLink>
 </template>
