@@ -8,19 +8,49 @@ export default defineNuxtConfig({
   srcDir: 'src',
   ssr: true,
 
+  runtimeConfig: {
+    public: {
+      siteUrl: SITE_URL
+    }
+  },
+
   app: {
     head: {
       title: 'WiseDream',
       meta: [
         { name: 'color-scheme', content: 'light dark' },
         { name: 'theme-color', media: '(prefers-color-scheme: light)', content: '#ffffff' },
-        { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#0b0f1a' }
+        { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#0b0f1a' },
+
+        // Глобальное описание (можно поменять текст)
+        { name: 'description', content: 'Портфолио WiseDream: веб-проекты, интерфейсы и боты.' },
+
+        // Open Graph (дефолты для всего сайта)
+        { property: 'og:site_name', content: 'WiseDream' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:title', content: 'WiseDream' },
+        { property: 'og:description', content: 'Портфолио WiseDream: веб-проекты, интерфейсы и боты.' },
+        { property: 'og:url', content: SITE_URL },
+        { property: 'og:image', content: `${SITE_URL}/og/default.png` },
+
+        // Twitter
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'WiseDream' },
+        { name: 'twitter:description', content: 'Портфолио WiseDream: веб-проекты, интерфейсы и боты.' },
+        { name: 'twitter:image', content: `${SITE_URL}/og/default.png` }
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' as any },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap' }
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap' },
+
+        { rel: 'canonical', href: SITE_URL }
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+        }
       ]
     }
   },
@@ -44,6 +74,7 @@ export default defineNuxtConfig({
           { code: 'de', iso: 'de-DE', file: 'de.json', name: 'Deutsch' }
         ],
         lazy: true,
+        // НЕ трогаю, как просил
         langDir: resolve('src/locales'),
         defaultLocale: 'en',
         strategy: 'prefix_except_default',
@@ -64,7 +95,8 @@ export default defineNuxtConfig({
         defaults: { changefreq: 'weekly', priority: 0.7 },
         xsl: true,
         autoI18n: false,
-        autoLastmod: true
+        autoLastmod: true,
+        urls: ['/', '/about', '/projects', '/contacts'].map(loc => ({ loc }))
       }
     ],
 
@@ -109,5 +141,5 @@ export default defineNuxtConfig({
     plugins: [tailwind()]
   },
 
-  nitro: { sourceMap: false },
+  nitro: { sourceMap: false }
 })
