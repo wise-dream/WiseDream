@@ -63,7 +63,6 @@ export default defineNuxtConfig({
         siteUrl: SITE_URL,
         defaults: { changefreq: 'weekly', priority: 0.7 },
         xsl: true,
-        sitemapName: 'sitemap',
         autoLastmod: true
       }
     ],
@@ -72,7 +71,7 @@ export default defineNuxtConfig({
       '@nuxtjs/robots',
       {
         host: SITE_URL,
-        sitemap: [`${SITE_URL}/sitemap.xml`],
+        sitemap: [`${SITE_URL}/sitemap_index.xml`],
         rules: [{ userAgent: '*', allow: '/' }]
       }
     ],
@@ -110,9 +109,4 @@ export default defineNuxtConfig({
   },
 
   nitro: { sourceMap: false },
-
-  routeRules: {
-    '/robots.txt': { prerender: true },
-    '/sitemap.xml': { prerender: true }
-  }
 })
