@@ -63,6 +63,7 @@ export default defineNuxtConfig({
         siteUrl: SITE_URL,
         defaults: { changefreq: 'weekly', priority: 0.7 },
         xsl: true,
+        autoI18n: false,
         autoLastmod: true
       }
     ],
