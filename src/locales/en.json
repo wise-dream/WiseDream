@@ -336,11 +336,11 @@
         }
       },
       "3": {
-        "title": "KZhYa Site",
+        "title": "CCY Site",
         "org": "AEB IT",
         "period": "December 2024 — February 2025",
         "link": "https://card.sakha.gov.ru/",
-        "description": "Yakutia Resident Card site. Integration with KZhYa API.",
+        "description": "Yakutia Resident Card site. Integration with CCY API.",
         "status": "active",
         "tags": {
           "0": "Next.js",

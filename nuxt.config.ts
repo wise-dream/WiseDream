@@ -62,7 +62,9 @@ export default defineNuxtConfig({
       {
         siteUrl: SITE_URL,
         defaults: { changefreq: 'weekly', priority: 0.7 },
-        xsl: true
+        xsl: true,
+        sitemapName: 'sitemap',
+        autoLastmod: true
       }
     ],
 
@@ -71,7 +73,7 @@ export default defineNuxtConfig({
       {
         host: SITE_URL,
         sitemap: [`${SITE_URL}/sitemap.xml`],
-        groups: [{ userAgent: '*', allow: '/' }]
+        rules: [{ userAgent: '*', allow: '/' }]
       }
     ],
 
@@ -111,7 +113,6 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/robots.txt': { prerender: true },
-    '/sitemap.xml': { prerender: true },
-    '/sitemap_index.xml': { prerender: true }
-  },
+    '/sitemap.xml': { prerender: true }
+  }
 })

@@ -336,11 +336,11 @@
         }
       },
       "3": {
-        "title": "Sitio KZhYa",
+        "title": "Sitio TCH",
         "org": "AEB IT",
         "period": "Diciembre 2024 — Febrero 2025",
         "link": "https://card.sakha.gov.ru/",
-        "description": "Sitio de la Tarjeta de Residente de Yakutia. Integración con API KZhYa.",
+        "description": "Sitio de la Tarjeta de Residente de Yakutia. Integración con API TCH.",
         "status": "active",
         "tags": {
           "0": "Next.js",

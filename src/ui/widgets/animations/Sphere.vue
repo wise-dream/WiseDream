@@ -30,11 +30,11 @@ interface Props {
   hueLightness?: number
 
   autoRotate?: boolean
-  autoRotateSpeed?: number         // рад/с, постоянное кручение вокруг Y
+  autoRotateSpeed?: number
   inertia?: boolean
-  inertiaFriction?: number         // «трение» (1/с) — чем больше, тем быстрее затухает инерция
-  maxAngularVelocity?: number      // рад/с, ограничение скорости
-  pointerSensitivity?: number      // множитель поворота на drag (рад на ширину/высоту)
+  inertiaFriction?: number
+  maxAngularVelocity?: number
+  pointerSensitivity?: number
 }
 const props = withDefaults(defineProps<Props>(), {
   radius: 1.0,
@@ -58,7 +58,7 @@ const props = withDefaults(defineProps<Props>(), {
   inertia: true,
   inertiaFriction: 3.0,
   maxAngularVelocity: 2.5,
-  pointerSensitivity: Math.PI       // полный свайп по ширине ≈ 180°
+  pointerSensitivity: Math.PI
 })
 
 const containerRef = ref<HTMLDivElement | null>(null)
@@ -74,9 +74,9 @@ let colorsAttr: BufferAttribute | null = null
 let resizeObs: ResizeObserver | null = null
 
 let dragging = false
+let lastDragT = 0
 let startX = 0
 let startY = 0
-let lastDragT = 0
 
 let hoveredFace = -1
 let needsRender = true
@@ -117,8 +117,8 @@ const setFaceColor = (faceIndex: number, color: Color) => {
 const highlightFace = (faceIndex: number) => {
   if (!THREE || !mesh || !colorsAttr) return
   if (hoveredFace === faceIndex) return
-  if (hoveredFace >= 0) setFaceColor(hoveredFace, new THREE.Color(props.baseColor))
-  if (faceIndex >= 0) setFaceColor(faceIndex, new THREE.Color(props.highlightColor))
+  if (hoveredFace >= 0) setFaceColor(hoveredFace, new (THREE as any).Color(props.baseColor))
+  if (faceIndex >= 0) setFaceColor(faceIndex, new (THREE as any).Color(props.highlightColor))
   hoveredFace = faceIndex
   colorsAttr.needsUpdate = true
   scheduleRender()
@@ -126,8 +126,8 @@ const highlightFace = (faceIndex: number) => {
 
 const hexToHsl = (c: string, T: typeof import('three')) => { const col = new T.Color(c); const hsl = { h: 0, s: 0, l: 0 }; (col as any).getHSL(hsl); return hsl }
 const hslToColor = (h: number, s: number, l: number, T: typeof import('three')) => { const c = new T.Color(); c.setHSL(h, s, l); return c }
-const lerp = (a: number, b: number, t: number) => a + (b - a) * t
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3)
+const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v))
 
 const startColorTransition = (fromHex: string, toHex: string) => {
   if (!THREE || !mesh || !colorsAttr) return
@@ -150,11 +150,11 @@ const startColorTransition = (fromHex: string, toHex: string) => {
     const k = easeOut(t)
     const hWrapped = (h1 + (h2 - h1) * k) % 1.0
     const col = hslToColor(hWrapped, s, l, T)
-    const geom = mesh.geometry as BufferGeometry
+    const geom = mesh!.geometry as BufferGeometry
     const posAttr = geom.getAttribute('position') as BufferAttribute | undefined
     if (posAttr) {
-      for (let i = 0; i < posAttr.count; i++) colorsAttr.setXYZ(i, col.r, col.g, col.b)
-      colorsAttr.needsUpdate = true
+      for (let i = 0; i < posAttr.count; i++) colorsAttr!.setXYZ(i, col.r, col.g, col.b)
+      colorsAttr!.needsUpdate = true
     }
     scheduleRender()
 
@@ -195,11 +195,11 @@ const startHueLoop = () => {
     const h = (hueStart + (elapsed / period)) % 1.0
     const col = hslToColor(h, s, l, T)
 
-    const geom = mesh.geometry as BufferGeometry
+    const geom = mesh!.geometry as BufferGeometry
     const posAttr = geom.getAttribute('position') as BufferAttribute | undefined
     if (posAttr) {
-      for (let i = 0; i < posAttr.count; i++) colorsAttr.setXYZ(i, col.r, col.g, col.b)
-      colorsAttr.needsUpdate = true
+      for (let i = 0; i < posAttr.count; i++) colorsAttr!.setXYZ(i, col.r, col.g, col.b)
+      colorsAttr!.needsUpdate = true
     }
     scheduleRender()
     rafHue = requestAnimationFrame(step) as unknown as number
@@ -274,8 +274,6 @@ const animateIn = () => {
   requestAnimationFrame(step)
 }
 
-const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v))
-
 const init = async () => {
   const mod = await import('three'); THREE = mod
   const el = containerRef.value; if (!el || !THREE) return
@@ -294,8 +292,12 @@ const init = async () => {
   renderer.toneMapping = THREE.NoToneMapping
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, dprCap))
 
-  const canvas = renderer.domElement
-  canvas.style.width = '100%'; canvas.style.height = '100%'; canvas.style.display = 'block'
+  // ЕДИНСТВЕННОЕ объявление canvas
+  const canvas = renderer.domElement as HTMLCanvasElement
+  canvas.style.width = '100%'
+  canvas.style.height = '100%'
+  canvas.style.display = 'block'
+  ;(canvas.style as any).touchAction = 'none' // важно для тач-джестов
   el.appendChild(canvas)
 
   scene = new THREE.Scene()
@@ -331,14 +333,16 @@ const init = async () => {
   resizeObs = new ResizeObserver(doResize); resizeObs.observe(el); doResize()
 
   const getNdc = (x: number, y: number) => {
-    const r = renderer!.domElement.getBoundingClientRect()
+    const r = canvas.getBoundingClientRect()
     return { x: ((x - r.left) / r.width) * 2 - 1, y: -(((y - r.top) / r.height) * 2 - 1) }
   }
 
   const onPointerMove = (e: PointerEvent) => {
     if (!THREE || !mesh || !camera || !raycaster) return
-    const cw = renderer!.domElement.clientWidth || 1
-    const ch = renderer!.domElement.clientHeight || 1
+    if (e.pointerType === 'touch' && !e.isPrimary) return
+
+    const cw = canvas.clientWidth || 1
+    const ch = canvas.clientHeight || 1
 
     if (dragging) {
       e.preventDefault()
@@ -375,24 +379,37 @@ const init = async () => {
   }
 
   const onPointerDown = (e: PointerEvent) => {
+    if (e.pointerType === 'touch' && !e.isPrimary) return
     dragging = true
     startX = e.clientX
     startY = e.clientY
     lastDragT = performance.now()
+    try { canvas.setPointerCapture(e.pointerId) } catch {}
     e.preventDefault()
+  }
+
+  const finishDrag = (e?: PointerEvent) => {
+    if (!dragging) return
+    dragging = false
+    try { if (e) canvas.releasePointerCapture(e.pointerId) } catch {}
   }
 
   const onPointerUp = (e: PointerEvent) => {
     const wasDragging = dragging
-    dragging = false
+    finishDrag(e)
     if (!props.clickable || wasDragging || !mesh || !camera || !raycaster) return
     const p = getNdc(e.clientX, e.clientY); raycaster.setFromCamera(p as any, camera)
     const hit = raycaster.intersectObject(mesh, false)[0]; if (typeof hit?.faceIndex === 'number') {}
   }
 
+  const onPointerCancel = (e: PointerEvent) => { finishDrag(e) }
+  const onLostCapture  = () => { dragging = false }
+
   canvas.addEventListener('pointermove', onPointerMove, { passive: false })
   canvas.addEventListener('pointerdown', onPointerDown, { passive: false })
-  window.addEventListener('pointerup', onPointerUp, { passive: true })
+  canvas.addEventListener('pointerup', onPointerUp, { passive: true })
+  canvas.addEventListener('pointercancel', onPointerCancel, { passive: true })
+  canvas.addEventListener('lostpointercapture', onLostCapture, { passive: true })
 
   scheduleRender()
   animateIn()
@@ -411,9 +428,13 @@ const init = async () => {
     if (cycleTimer) clearTimeout(cycleTimer)
     if (rafHue) cancelAnimationFrame(rafHue)
     if (rafMotion) cancelAnimationFrame(rafMotion)
-    window.removeEventListener('pointerup', onPointerUp)
-    renderer?.domElement.removeEventListener('pointermove', onPointerMove as any)
-    renderer?.domElement.removeEventListener('pointerdown', onPointerDown as any)
+
+    canvas.removeEventListener('pointermove', onPointerMove as any)
+    canvas.removeEventListener('pointerdown', onPointerDown as any)
+    canvas.removeEventListener('pointerup', onPointerUp as any)
+    canvas.removeEventListener('pointercancel', onPointerCancel as any)
+    canvas.removeEventListener('lostpointercapture', onLostCapture as any)
+
     resizeObs?.disconnect()
     if (scene && mesh) scene.remove(mesh)
     ;(geom as any)?.dispose?.(); (mat as any)?.dispose?.()
@@ -442,15 +463,18 @@ onMounted(() => { init() })
 </template>
 
 <style scoped>
-.sphere-wrap { 
+.sphere-wrap {
   position: relative;
   cursor: pointer;
+  user-select: none;
 }
-:deep(canvas) { display: block; width: 100% !important; height: 100% !important; }
-:host, .sphere-wrap { user-select: none; }
-
+:deep(canvas) {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: none; /* критично для мобильных свайпов */
+}
 .aura {
-
   background: radial-gradient(closest-side, rgba(124,131,255,.22), rgba(124,131,255,0) 70%);
   filter: blur(8px);
   opacity: .9;

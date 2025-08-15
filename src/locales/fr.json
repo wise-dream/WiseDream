@@ -336,11 +336,11 @@
         }
       },
       "3": {
-        "title": "Site KZhYa",
+        "title": "Site CRY",
         "org": "AEB IT",
         "period": "Décembre 2024 — Février 2025",
         "link": "https://card.sakha.gov.ru/",
-        "description": "Site de la Carte de Résident de Yakoutie. Intégration avec l'API KZhYa.",
+        "description": "Site de la Carte de Résident de Yakoutie. Intégration avec l'API CRY.",
         "status": "active",
         "tags": {
           "0": "Next.js",

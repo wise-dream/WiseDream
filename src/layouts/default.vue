@@ -2,6 +2,8 @@
 import Header from '@/ui/widgets/header/Header.vue'
 import Container from '@/ui/layout/Container.vue'
 import LifeBackground from '@/ui/widgets/animations/LifeBackground.vue'
+import { useEasterToast } from '@/utils/composables/useEasterToast'
+useEasterToast()
 </script>
 
 <template>
@@ -13,6 +15,7 @@ import LifeBackground from '@/ui/widgets/animations/LifeBackground.vue'
       <Container>
         <slot />
       </Container>
+      <UNotifications />
     </main>
   </div>
 </template>

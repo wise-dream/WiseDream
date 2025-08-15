@@ -1,6 +1,6 @@
 <!-- src/ui/sections/ExperienceTimeline.vue -->
 <script setup lang="ts">
-import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { useI18n } from '#imports'
 
 type Kind = 'work' | 'project'
@@ -73,22 +73,72 @@ const activeIndex = ref(0)
 const listRef = ref<HTMLElement | null>(null)
 let io: IntersectionObserver | null = null
 
+// refs на карточки для скролла
+const itemRefs: Record<number, HTMLElement | null> = {}
+const setItemRef = (el: HTMLElement | null, i: number) => { itemRefs[i] = el }
+
+// какая карточка «вспыхивает» после клика
+const flashIndex = ref<number | null>(null)
+
+const getHeaderOffset = () => {
+  const v = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 64
+  return v + 20 // зазор
+}
+
+// Перезапуск анимации подсветки (в т.ч. при повторном клике по той же дате)
+const flashCard = async (i: number) => {
+  if (flashIndex.value === i) {
+    flashIndex.value = null
+    await nextTick()
+  }
+  flashIndex.value = i
+  window.setTimeout(() => { if (flashIndex.value === i) flashIndex.value = null }, 1100)
+}
+
+const scrollToIndex = async (i: number) => {
+  await nextTick()
+  const el = itemRefs[i]
+  if (!el) return
+
+  // мгновенно подсветим активный пункт в aside
+  activeIndex.value = i
+
+  // запустим подсветку карточки (перезапускаем анимацию)
+  flashCard(i)
+
+  const top = el.getBoundingClientRect().top + window.scrollY - getHeaderOffset()
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+}
+
+const buildObserver = () => {
+  const rootMargin = `-${getHeaderOffset()}px 0px -90% 0px`
+  io = new IntersectionObserver(
+    (ents) => {
+      // выбираем самый верхний видимый элемент (минимальный data-index среди пересекающихся)
+      const visible: number[] = []
+      for (const e of ents) {
+        if (e.isIntersecting) {
+          const idx = Number(e.target.getAttribute('data-index') || -1)
+          if (idx >= 0) visible.push(idx)
+        }
+      }
+      if (visible.length) {
+        activeIndex.value = Math.min(...visible)
+      }
+    },
+    // область пересечения — «полоса» у верхней кромки вьюпорта,
+    // сдвинутая вниз на высоту шапки; нижняя граница сильно урезана.
+    { root: null, rootMargin, threshold: 0 }
+  )
+}
+
 onMounted(() => {
   const el = listRef.value
   if (!el) return
-  io = new IntersectionObserver(
-    (ents) => {
-      for (const e of ents) {
-        if (e.isIntersecting) {
-          const idx = Number(e.target.getAttribute('data-index') || 0)
-          activeIndex.value = idx
-        }
-      }
-    },
-    { root: null, rootMargin: '-50% 0px -50% 0px', threshold: 0 }
-  )
+  buildObserver()
   el.querySelectorAll<HTMLElement>('[data-index]').forEach(n => io?.observe(n))
 })
+
 onBeforeUnmount(() => { io?.disconnect(); io = null })
 
 const badgeText = (k: Kind) =>
@@ -111,22 +161,26 @@ const badgeClass = (k: Kind) =>
       </p>
 
       <div class="grid gap-8 lg:grid-cols-[260px_1fr]">
-        <!-- Фиксируем липкий отступ: 64px (header) + 20px (зазор) = 84px -->
-        <aside class="hidden lg:sticky lg:top-[84px] lg:h-fit lg:block ">
+        <!-- Липкий сайдбар: 64px (header) + 20px (зазор) -->
+        <aside class="hidden lg:block lg:sticky lg:top-[84px] lg:h-fit">
           <ul class="space-y-2.5" role="list">
-            <li
-              v-for="(it, i) in entries"
-              :key="i"
-              class="flex items-center gap-3 px-3 py-2 rounded-lg border transition-colors"
-              :class="activeIndex === i ? 'bg-primary/15 border-primary/40' : 'bg-bg/40 border-border/50 hover:bg-bg/55'"
-            >
-              <span
-                class="inline-block size-2 rounded-full"
-                :class="activeIndex === i ? 'bg-primary' : 'bg-border/80'"
-              />
-              <span class="text-sm opacity-90">
-                {{ it.period || it.start + (it.end ? ' — ' + it.end : '') }}
-              </span>
+            <li v-for="(it, i) in entries" :key="i">
+              <button
+                type="button"
+                class="w-full flex items-center gap-3 px-3 py-2 rounded-lg border transition-colors cursor-pointer"
+                :class="activeIndex === i ? 'bg-primary/15 border-primary/40' : 'bg-bg/40 border-border/50 hover:bg-bg/55'"
+                @click="scrollToIndex(i)"
+                @keydown.enter.prevent="scrollToIndex(i)"
+                @keydown.space.prevent="scrollToIndex(i)"
+              >
+                <span
+                  class="inline-block size-2 rounded-full"
+                  :class="activeIndex === i ? 'bg-primary' : 'bg-border/80'"
+                />
+                <span class="text-sm opacity-90">
+                  {{ it.period || it.start + (it.end ? ' — ' + it.end : '') }}
+                </span>
+              </button>
             </li>
           </ul>
         </aside>
@@ -136,7 +190,9 @@ const badgeClass = (k: Kind) =>
             v-for="(it, i) in entries"
             :key="i"
             :data-index="i"
-            class="p-6 rounded-xl border border-border/70 bg-bg/40 hover:bg-bg/55 transition-colors"
+            :ref="(el) => setItemRef(el as HTMLElement | null, i)"
+            class="p-6 rounded-xl border border-border/70 bg-bg/40 hover:bg-bg/55 transition-colors article-anchor"
+            :class="{ 'flash-card': flashIndex === i }"
           >
             <header class="flex items-start justify-between gap-4 mb-2">
               <h3 class="text-lg font-semibold">
@@ -168,6 +224,9 @@ const badgeClass = (k: Kind) =>
 </template>
 
 <style scoped>
+/* учёт высоты шапки при якорном скролле */
+.article-anchor { scroll-margin-top: var(--header-h, 84px); }
+
 .mask-reveal {
   --dur: 560ms; --ease: cubic-bezier(.22,.9,.2,1);
   opacity: 0; clip-path: inset(0 50% 0 50%); transform: translateY(12px);
@@ -176,4 +235,28 @@ const badgeClass = (k: Kind) =>
 }
 @keyframes maskIn { to { clip-path: inset(0 0 0 0); transform: translateY(0); } }
 @keyframes fadeIn { to { opacity: 1; } }
+
+/* мягкая «вспышка» карточки после клика в aside */
+@keyframes flashCard {
+  0% {
+    outline: 0 solid rgba(255,255,255,0);
+    box-shadow: 0 0 0 0 rgba(255,255,255,0), 0 0 0 0 rgba(255,255,255,0);
+  }
+  40% {
+    /* заметный белый обвод и «ореол» */
+    outline: 8px solid rgba(255,255,255,.22);
+    box-shadow:
+      0 10px 36px rgba(255,255,255,.18),  /* мягкий свет */
+      0 0 0 10px rgba(255,255,255,.16);   /* внешний ореол */
+  }
+  100% {
+    outline: 0 solid rgba(255,255,255,0);
+    box-shadow: 0 0 0 0 rgba(255,255,255,0), 0 0 0 0 rgba(255,255,255,0);
+  }
+}
+
+/* увеличили длительность до 1.6s */
+.flash-card {
+  animation: flashCard 1600ms cubic-bezier(.22,.9,.2,1);
+}
 </style>

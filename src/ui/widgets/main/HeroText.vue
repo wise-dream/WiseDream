@@ -36,6 +36,9 @@ const name = computed(() => props.name || t('hero.name'))
 const subtitle = computed(() => props.subtitle || t('hero.subtitle'))
 const primaryLabel = computed(() => props.primaryLabel || t('hero.primaryButton'))
 const secondaryLabel = computed(() => props.secondaryLabel || t('hero.secondaryButton'))
+
+const GITHUB_URL = 'https://github.com/wise-dream'
+const LINKEDIN_URL = 'https://www.linkedin.com/in/vinokurov-kamil/'
 </script>
 
 <template>
@@ -72,10 +75,20 @@ const secondaryLabel = computed(() => props.secondaryLabel || t('hero.secondaryB
 
     <div
       v-if="primaryLabel || secondaryLabel"
-      class="mask-reveal mt-5 md:mt-6 flex items-center gap-3"
+      class="mask-reveal mt-5 md:mt-6 flex items-center gap-6 h-[80px]"
       :class="[props.align === 'center' ? 'justify-center' : '']"
       style="--d:380ms"
     >
+        <NuxtLink
+          :to="GITHUB_URL"
+          target="_blank"
+          rel="noopener"
+          :aria-label="t('contact.socials.githubAria')"
+          class="rounded-full w-[40px] h-[40px] flex items-center justify-center shadow-[0_0_25px_6px_rgba(34,211,238,.28)]"
+        >
+          <Icon name="mdi:github" class="size-8" />
+        </NuxtLink>
+     
       <UButton
         v-if="primaryLabel"
         :to="localePath('/projects')"
@@ -90,6 +103,17 @@ const secondaryLabel = computed(() => props.secondaryLabel || t('hero.secondaryB
         variant="soft"
         size="md"
       >{{ secondaryLabel }}</UButton>
+
+        <NuxtLink
+          v-if="LINKEDIN_URL"
+          :to="LINKEDIN_URL"
+          target="_blank"
+          rel="noopener"
+          :aria-label="t('contact.socials.linkedinAria')"
+          class="rounded-full w-[40px] h-[40px] flex items-center justify-center  shadow-[0_0_25px_6px_rgba(34,211,238,.28)]"
+        >
+          <Icon name="mdi:linkedin" class="size-8" />
+        </NuxtLink>
     </div>
   </div>
 </template>

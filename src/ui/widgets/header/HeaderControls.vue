@@ -77,7 +77,7 @@ const toggleMenu = async () => {
       :aria-controls="ui.isMenuOpen ? 'mobile-nav' : undefined"
       @click="toggleMenu"
     >
-      <Icon name="heroicons:bars-3" class="h-5 w-5" />
+      <Icon name="heroicons:bars-3" class="h-8 w-8" />
     </UButton>
   </div>
 </template>

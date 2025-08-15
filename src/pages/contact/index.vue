@@ -72,7 +72,7 @@
       </div>
 
       <!-- Соцсети -->
-      <div class="h-[120px] mask-reveal mt-8 md:mt-10 flex items-center justify-center gap-3" style="--d:260ms">
+      <div class="h-[120px] mask-reveal mt-8 md:mt-10 flex items-center justify-center gap-8" style="--d:260ms">
         <NuxtLink
           :to="GITHUB_URL"
           target="_blank"
@@ -80,7 +80,7 @@
           :aria-label="t('contact.socials.githubAria')"
           class="social-btn shadow-[0_0_25px_6px_rgba(34,211,238,.28)]"
         >
-          <Icon name="mdi:github" class="size-5" />
+          <Icon name="mdi:github" class="size-8" />
         </NuxtLink>
 
         <NuxtLink
@@ -91,7 +91,7 @@
           :aria-label="t('contact.socials.linkedinAria')"
           class="social-btn shadow-[0_0_25px_6px_rgba(34,211,238,.28)]"
         >
-          <Icon name="mdi:linkedin" class="size-5" />
+          <Icon name="mdi:linkedin" class="size-8" />
         </NuxtLink>
       </div>
     </div>

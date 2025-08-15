@@ -336,11 +336,11 @@
         }
       },
       "3": {
-        "title": "KZhYa-Website",
+        "title": "EJK-Website",
         "org": "AEB IT",
         "period": "Dezember 2024 — Februar 2025",
         "link": "https://card.sakha.gov.ru/",
-        "description": "Website der Jakutien-Einwohnerkarte. Integration mit KZhYa API.",
+        "description": "Website der Jakutien-Einwohnerkarte. Integration mit EJK API.",
         "status": "active",
         "tags": {
           "0": "Next.js",
