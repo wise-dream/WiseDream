@@ -1,3 +1,4 @@
+// nuxt.config.ts
 import { defineNuxtConfig } from 'nuxt/config'
 import { resolve } from 'pathe'
 import tailwind from '@tailwindcss/vite'
@@ -8,6 +9,7 @@ export default defineNuxtConfig({
   srcDir: 'src',
   ssr: true,
 
+  // Делаем URL сайта доступным для модулей и на билде/рантайме
   runtimeConfig: {
     public: {
       siteUrl: SITE_URL
@@ -16,16 +18,24 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: { lang: 'en' },               // можно менять по i18n на страницах
       title: 'WiseDream',
       meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+
+        // Цветовые схемы
         { name: 'color-scheme', content: 'light dark' },
         { name: 'theme-color', media: '(prefers-color-scheme: light)', content: '#ffffff' },
         { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#0b0f1a' },
 
-        // Глобальное описание (можно поменять текст)
+        // Базовое описание
         { name: 'description', content: 'Портфолио WiseDream: веб-проекты, интерфейсы и боты.' },
 
-        // Open Graph (дефолты для всего сайта)
+        // Индексация
+        { name: 'robots', content: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' },
+
+        // Open Graph (дефолты на весь сайт)
         { property: 'og:site_name', content: 'WiseDream' },
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: 'WiseDream' },
@@ -45,12 +55,12 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' as any },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap' },
 
+        // Каноникал по умолчанию (на страницах можно переопределять useHead/useSeoMeta)
         { rel: 'canonical', href: SITE_URL }
       ],
       script: [
-        {
-          type: 'application/ld+json',
-        }
+        // оставил под JSON-LD (если понадобится — заполни innerHTML)
+        { type: 'application/ld+json' }
       ]
     }
   },
@@ -61,6 +71,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/ui',
 
+    // i18n — НЕ трогаю langDir
     [
       '@nuxtjs/i18n',
       {
@@ -74,7 +85,6 @@ export default defineNuxtConfig({
           { code: 'de', iso: 'de-DE', file: 'de.json', name: 'Deutsch' }
         ],
         lazy: true,
-        // НЕ трогаю, как просил
         langDir: resolve('src/locales'),
         defaultLocale: 'en',
         strategy: 'prefix_except_default',
@@ -88,23 +98,30 @@ export default defineNuxtConfig({
       }
     ],
 
+    // Sitemap
     [
       '@nuxtjs/sitemap',
       {
+        // Берёт URL из runtimeConfig.public.siteUrl, но держим и здесь «на всякий»
         siteUrl: SITE_URL,
-        defaults: { changefreq: 'weekly', priority: 0.7 },
-        xsl: true,
+
+        // Один общий sitemap по /sitemap.xml
         autoI18n: false,
+        xsl: false,                 // убираем лишний динамический маршрут XSL
         autoLastmod: true,
-        urls: ['/', '/about', '/projects', '/contacts'].map(loc => ({ loc }))
+        defaults: { changefreq: 'weekly', priority: 0.7 },
+
+        // Явный список страниц (можно расширять)
+        urls: ['/', '/about', '/projects', '/contacts'].map((loc) => ({ loc }))
       }
     ],
 
+    // Robots.txt → указывает на /sitemap.xml
     [
       '@nuxtjs/robots',
       {
         host: SITE_URL,
-        sitemap: [`${SITE_URL}/sitemap_index.xml`],
+        sitemap: [`${SITE_URL}/sitemap.xml`],
         rules: [{ userAgent: '*', allow: '/' }]
       }
     ],
@@ -112,6 +129,7 @@ export default defineNuxtConfig({
     '@nuxt/image'
   ],
 
+  // ————— проектное
   css: ['~/assets/css/tailwind.css'],
 
   alias: {
@@ -141,5 +159,11 @@ export default defineNuxtConfig({
     plugins: [tailwind()]
   },
 
-  nitro: { sourceMap: false }
+  nitro: { sourceMap: false },
+
+  // Пререндерим sitemap и robots, чтобы отдаваться как статика
+  routeRules: {
+    '/sitemap.xml': { prerender: true },
+    '/robots.txt': { prerender: true }
+  }
 })
