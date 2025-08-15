@@ -84,7 +84,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/vinokurov-kamil/'
           target="_blank"
           rel="noopener"
           :aria-label="t('contact.socials.githubAria')"
-          class="rounded-full w-[40px] h-[40px] flex items-center justify-center shadow-[0_0_25px_6px_rgba(34,211,238,.28)]"
+          class="rounded-full w-[40px] h-[40px] items-center justify-center shadow-[0_0_25px_6px_rgba(34,211,238,.28)] hidden md:flex"
         >
           <Icon name="mdi:github" class="size-8" />
         </NuxtLink>
@@ -110,7 +110,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/vinokurov-kamil/'
           target="_blank"
           rel="noopener"
           :aria-label="t('contact.socials.linkedinAria')"
-          class="rounded-full w-[40px] h-[40px] flex items-center justify-center  shadow-[0_0_25px_6px_rgba(34,211,238,.28)]"
+          class="rounded-full w-[40px] h-[40px] items-center justify-center shadow-[0_0_25px_6px_rgba(34,211,238,.28)] hidden md:flex"
         >
           <Icon name="mdi:linkedin" class="size-8" />
         </NuxtLink>
