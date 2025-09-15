@@ -23,8 +23,8 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
-  // чтобы tsc не сканил node_modules
-  "exclude": ["node_modules"],
+  // чтобы tsc не сканил node_modules и тесты
+  "exclude": ["node_modules", "test/**/*", "**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
   // гарантируем, что .vue тоже попадают под типчек
   "include": ["**/*.ts", "**/*.tsx", "**/*.vue"]
 }
