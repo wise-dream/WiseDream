@@ -13,7 +13,7 @@ jobs:
     env:
       INSTALL_CMD: "npm ci"
       LINT_CMD: "npm run check || echo 'no-lint'"
-      TEST_CMD: "npm test -- --ci || echo 'no-tests'"
+      TEST_CMD: "npm test || echo 'no-tests'"
       BUILD_CMD: "npm run build"
 
     steps:
