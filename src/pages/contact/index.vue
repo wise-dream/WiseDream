@@ -99,33 +99,37 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { useI18n } from '#imports'
+import { computed, ref } from 'vue';
+import { useI18n } from '#imports';
 
 // === Ваши контакты ===
-const EMAIL = 'kamilvinokurov@gmail.com'
-const TELEGRAM_HANDLE = 'Wise_Dream'
-const GITHUB_URL = 'https://github.com/wise-dream'
-const LINKEDIN_URL = 'https://www.linkedin.com/in/vinokurov-kamil/'
+const EMAIL = 'kamilvinokurov@gmail.com';
+const TELEGRAM_HANDLE = 'Wise_Dream';
+const GITHUB_URL = 'https://github.com/wise-dream';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/vinokurov-kamil/';
 
-const { t } = useI18n({ useScope: 'global' })
+const { t } = useI18n({ useScope: 'global' });
 
 // Ссылки
-const mailtoSubject = computed(() => t('contact.mailtoSubject', 'Hello from portfolio'))
-const mailtoUrl = computed(() => `mailto:${EMAIL}?subject=${encodeURIComponent(mailtoSubject.value)}`)
-const telegramUrl = computed(() => `https://t.me/${TELEGRAM_HANDLE}`)
+const mailtoSubject = computed(() => t('contact.mailtoSubject', 'Hello from portfolio'));
+const mailtoUrl = computed(
+  () => `mailto:${EMAIL}?subject=${encodeURIComponent(mailtoSubject.value)}`
+);
+const telegramUrl = computed(() => `https://t.me/${TELEGRAM_HANDLE}`);
 
 // Копирование email
-const copied = ref(false)
+const copied = ref(false);
 const copyEmail = async () => {
   try {
-    await navigator.clipboard?.writeText?.(EMAIL)
-    copied.value = true
-    setTimeout(() => (copied.value = false), 1500)
+    await navigator.clipboard?.writeText?.(EMAIL);
+    copied.value = true;
+    setTimeout(() => {
+      copied.value = false;
+    }, 1500);
   } catch {
-    copied.value = false
+    copied.value = false;
   }
-}
+};
 </script>
 
 <style scoped>

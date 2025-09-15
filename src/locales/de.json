@@ -87,14 +87,7 @@
           "title": "Tschukotka Website",
           "org": "NEFU",
           "description": "Vue + Go. Schneller Release in ~2 Monaten. Backend auf Gin, PostgreSQL-Datenbank",
-          "tags": [
-            "TypeScript",
-            "Vue",
-            "Go",
-            "Gin",
-            "Nginx",
-            "CI/CD"
-          ]
+          "tags": ["TypeScript", "Vue", "Go", "Gin", "Nginx", "CI/CD"]
         },
         {
           "kind": "work",
@@ -124,11 +117,7 @@
           "title": "ChildrenOfAsiaBot",
           "org": "NEFU",
           "description": "RU ↔ EN Aufgaben, Tests und Lektionen für ChildrenOfAsia-Event. Auto-Prüfung über OPENAI API. Zweisprachige UX.",
-          "tags": [
-            "Aiogram",
-            "OPENAI API",
-            "Python"
-          ]
+          "tags": ["Aiogram", "OPENAI API", "Python"]
         },
         {
           "kind": "work",
@@ -139,12 +128,7 @@
           "org": "LLC \"SIVIG\"",
           "role": "Fullstack Developer (Vertrag)",
           "description": "Wohnungsbuchungsservice für den Hohen Norden: SSR auf Next.js, Autorisierung/Bestellungen, Docker.",
-          "tags": [
-            "Next.js",
-            "SSR",
-            "Docker",
-            "Python"
-          ]
+          "tags": ["Next.js", "SSR", "Docker", "Python"]
         },
         {
           "kind": "project",
@@ -154,11 +138,7 @@
           "title": "Zoo-Bot",
           "org": "LLC \"Orto Doydu\"",
           "description": "Information / Navigation und Admin-Panel. Entwickelt und geliefert in ~1 Monat.",
-          "tags": [
-            "Aiogram",
-            "Python",
-            "Telegram"
-          ]
+          "tags": ["Aiogram", "Python", "Telegram"]
         },
         {
           "kind": "work",
@@ -169,11 +149,7 @@
           "org": "inDriver SparkLab",
           "role": "Frontend Developer",
           "description": "Arbeit am InRoad-Produkt in der R&D-Abteilung. Komponenten, Integrationen, Feature-Lieferung.",
-          "tags": [
-            "Vue",
-            "TypeScript",
-            "Google Maps API"
-          ]
+          "tags": ["Vue", "TypeScript", "Google Maps API"]
         },
         {
           "kind": "project",
@@ -183,11 +159,7 @@
           "title": "Paralar",
           "org": "NEFU",
           "description": "SVFU Stundenplan-Bot — schnelle Suche, echte Nutzung, spart Studentenzeit.",
-          "tags": [
-            "Telegram",
-            "Aiogram",
-            "Python"
-          ]
+          "tags": ["Telegram", "Aiogram", "Python"]
         }
       ]
     },
@@ -196,11 +168,7 @@
       "categories": {
         "0": {
           "name": "Core",
-          "techs": [
-            "TypeScript",
-            "Go",
-            "Python"
-          ]
+          "techs": ["TypeScript", "Go", "Python"]
         },
         "1": {
           "name": "Frontend",
@@ -215,45 +183,23 @@
         },
         "2": {
           "name": "Backend",
-          "techs": [
-            "Go",
-            "NodeJS",
-            "Prisma",
-            "Gorm",
-            "Gin",
-            "Express"
-          ]
+          "techs": ["Go", "NodeJS", "Prisma", "Gorm", "Gin", "Express"]
         },
         "3": {
           "name": "API / Netzwerk",
-          "techs": [
-            "REST",
-            "GraphQL",
-            "WebSockets"
-          ]
+          "techs": ["REST", "GraphQL", "WebSockets"]
         },
         "4": {
           "name": "Infrastruktur",
-          "techs": [
-            "Vite",
-            "Webpack",
-            "Docker"
-          ]
+          "techs": ["Vite", "Webpack", "Docker"]
         },
         "5": {
           "name": "Karten",
-          "techs": [
-            "Google Maps API",
-            "Yandex Maps API"
-          ]
+          "techs": ["Google Maps API", "Yandex Maps API"]
         },
         "6": {
           "name": "UI / Qualität",
-          "techs": [
-            "Design-Systeme",
-            "ESLint/Prettier",
-            "Vitest/Playwright"
-          ]
+          "techs": ["Design-Systeme", "ESLint/Prettier", "Vitest/Playwright"]
         }
       }
     },

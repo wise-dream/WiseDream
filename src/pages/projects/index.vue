@@ -1,113 +1,161 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useI18n, useLocalePath } from '#imports'
+import { computed, ref } from 'vue';
+import { useI18n, useLocalePath } from '#imports';
 
-type ProjectType = 'web' | 'bot' | 'map' | 'edu' | 'other'
-type ProjectStatus = 'active' | 'delivered' | 'closed'
+type ProjectType = 'web' | 'bot' | 'map' | 'edu' | 'other';
+type ProjectStatus = 'active' | 'delivered' | 'closed';
 
 type ProjectItem = {
-  title: string
-  org?: string
-  period?: string
-  description?: string
-  tags?: string[]
-  link?: string
-  source?: string
-  type?: ProjectType
-  status?: ProjectStatus | string
-}
+  title: string;
+  org?: string;
+  period?: string;
+  description?: string;
+  tags?: string[];
+  link?: string;
+  source?: string;
+  type?: ProjectType;
+  status?: ProjectStatus | string;
+};
 
-const { t, te } = useI18n({ useScope: 'global' })
-const localePath = useLocalePath()
+const { t, te } = useI18n({ useScope: 'global' });
+const localePath = useLocalePath();
 
-const heroTitle = computed(() => t('projects.hero.title', 'Проекты'))
-const heroSubtitle = computed(() => t('projects.hero.subtitle', 'Подборка недавних работ и кейсов.'))
+const heroTitle = computed(() => t('projects.hero.title', 'Проекты'));
+const heroSubtitle = computed(() =>
+  t('projects.hero.subtitle', 'Подборка недавних работ и кейсов.')
+);
 
 // Чтение списка без массивов: projects.list.{i}.*
 const readItems = (): ProjectItem[] => {
-  const out: ProjectItem[] = []
-  const base = 'projects.list'
+  const out: ProjectItem[] = [];
+  const base = 'projects.list';
   for (let i = 0; i < 100; i++) {
-    const k = `${base}.${i}`
-    if (!te(`${k}.title`)) { if (i > 0) break; continue }
-    const title = t(`${k}.title`) as string
-    const org = te(`${k}.org`) ? (t(`${k}.org`) as string) : undefined
-    const period = te(`${k}.period`) ? (t(`${k}.period`) as string) : undefined
-    const description = te(`${k}.description`) ? (t(`${k}.description`) as string) : undefined
-    const link = te(`${k}.link`) ? (t(`${k}.link`) as string) : undefined
-    const source = te(`${k}.source`) ? (t(`${k}.source`) as string) : undefined
-    const status = te(`${k}.status`) ? (t(`${k}.status`) as string) : undefined
+    const k = `${base}.${i}`;
+    if (!te(`${k}.title`)) {
+      if (i > 0) break;
+      continue;
+    }
+    const title = t(`${k}.title`) as string;
+    const org = te(`${k}.org`) ? (t(`${k}.org`) as string) : undefined;
+    const period = te(`${k}.period`) ? (t(`${k}.period`) as string) : undefined;
+    const description = te(`${k}.description`) ? (t(`${k}.description`) as string) : undefined;
+    const link = te(`${k}.link`) ? (t(`${k}.link`) as string) : undefined;
+    const source = te(`${k}.source`) ? (t(`${k}.source`) as string) : undefined;
+    const status = te(`${k}.status`) ? (t(`${k}.status`) as string) : undefined;
 
-    const tags: string[] = []
+    const tags: string[] = [];
     for (let j = 0; j < 50; j++) {
-      const tk = `${k}.tags.${j}`
-      if (te(tk)) tags.push(t(tk) as string)
-      else if (j > 0) break
+      const tk = `${k}.tags.${j}`;
+      if (te(tk)) tags.push(t(tk) as string);
+      else if (j > 0) break;
     }
 
     // эвристика типа
-    const lowered = tags.map(s => s.toLowerCase())
-    let type: ProjectItem['type'] = 'other'
-    if (lowered.some(s => s.includes('telegram') || s.includes('bot') || s.includes('aiogram'))) type = 'bot'
-    else if (lowered.some(s => s.includes('vue') || s.includes('react') || s.includes('next') || s.includes('nuxt') || s.includes('go') || s.includes('gin') || s.includes('angular'))) type = 'web'
+    const lowered = tags.map((s) => s.toLowerCase());
+    let type: ProjectItem['type'] = 'other';
+    if (lowered.some((s) => s.includes('telegram') || s.includes('bot') || s.includes('aiogram')))
+      type = 'bot';
+    else if (
+      lowered.some(
+        (s) =>
+          s.includes('vue') ||
+          s.includes('react') ||
+          s.includes('next') ||
+          s.includes('nuxt') ||
+          s.includes('go') ||
+          s.includes('gin') ||
+          s.includes('angular')
+      )
+    )
+      type = 'web';
 
-    out.push({ title, org, period, description, tags: tags.length ? tags : undefined, link, source, type, status })
+    out.push({
+      title,
+      org,
+      period,
+      description,
+      tags: tags.length ? tags : undefined,
+      link,
+      source,
+      type,
+      status,
+    });
   }
-  return out
-}
+  return out;
+};
 
-const allItems = computed<ProjectItem[]>(readItems)
+const allItems = computed<ProjectItem[]>(readItems);
 
 // фильтры
 const filters = [
-  { key: 'all',  labelKey: 'projects.filters.all'  },
-  { key: 'web',  labelKey: 'projects.filters.web'  },
-  { key: 'bot',  labelKey: 'projects.filters.bot'  }
-] as const
+  { key: 'all', labelKey: 'projects.filters.all' },
+  { key: 'web', labelKey: 'projects.filters.web' },
+  { key: 'bot', labelKey: 'projects.filters.bot' },
+] as const;
 
-const activeFilter = ref<typeof filters[number]['key']>('all')
-const q = ref('')
+const activeFilter = ref<(typeof filters)[number]['key']>('all');
+const q = ref('');
 
 // подписи статусов
 const statusLabel = (s?: string) => {
   switch (s) {
-    case 'active':     return t('projects.statusLabels.active', 'Запущен')
-    case 'inprogress': return t('projects.statusLabels.inprogress', 'В процессе')
-    case 'delivered':  return t('projects.statusLabels.delivered', 'Сдан')
-    case 'closed':     return t('projects.statusLabels.closed', 'Закрыт')
-    default:           return s || ''
+    case 'active':
+      return t('projects.statusLabels.active', 'Запущен');
+    case 'inprogress':
+      return t('projects.statusLabels.inprogress', 'В процессе');
+    case 'delivered':
+      return t('projects.statusLabels.delivered', 'Сдан');
+    case 'closed':
+      return t('projects.statusLabels.closed', 'Закрыт');
+    default:
+      return s || '';
   }
-}
+};
 const statusClass = (s?: string) => {
   switch (s) {
-    case 'active':     return 'text-emerald-300 border-emerald-400/40 bg-emerald-500/10'
-    case 'inprogress': return 'text-amber-300 border-amber-400/40 bg-amber-500/10'
-    case 'delivered':  return 'text-sky-300 border-sky-400/40 bg-sky-500/10'
-    case 'closed':     return 'text-neutral-300 border-neutral-400/40 bg-red-500/10'
-    default:           return 'text-fg/80 border-border/60 bg-bg/30'
+    case 'active':
+      return 'text-emerald-300 border-emerald-400/40 bg-emerald-500/10';
+    case 'inprogress':
+      return 'text-amber-300 border-amber-400/40 bg-amber-500/10';
+    case 'delivered':
+      return 'text-sky-300 border-sky-400/40 bg-sky-500/10';
+    case 'closed':
+      return 'text-neutral-300 border-neutral-400/40 bg-red-500/10';
+    default:
+      return 'text-fg/80 border-border/60 bg-bg/30';
   }
-}
+};
 
 const filtered = computed(() => {
-  const qv = q.value.trim().toLowerCase()
-  return allItems.value.filter(it => {
-    const okType = activeFilter.value === 'all' ? true : (it.type === activeFilter.value)
-    if (!okType) return false
-    if (!qv) return true
+  const qv = q.value.trim().toLowerCase();
+  return allItems.value.filter((it) => {
+    const okType = activeFilter.value === 'all' ? true : it.type === activeFilter.value;
+    if (!okType) return false;
+    if (!qv) return true;
     const hay = [
-      it.title, it.org, it.period, it.description, ...(it.tags || []), statusLabel(it.status)
-    ].join(' ').toLowerCase()
-    return hay.includes(qv)
-  })
-})
+      it.title,
+      it.org,
+      it.period,
+      it.description,
+      ...(it.tags || []),
+      statusLabel(it.status),
+    ]
+      .join(' ')
+      .toLowerCase();
+    return hay.includes(qv);
+  });
+});
 
 const iconFor = (type: ProjectItem['type']) => {
   switch (type) {
-    case 'bot': return 'heroicons:chat-bubble-bottom-center-text'
-    case 'web': return 'heroicons:window'
-    default: return 'heroicons:sparkles'
+    case 'bot':
+      return 'heroicons:chat-bubble-bottom-center-text';
+    case 'web':
+      return 'heroicons:window';
+    default:
+      return 'heroicons:sparkles';
   }
-}
+};
 </script>
 
 <template>

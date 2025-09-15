@@ -1,92 +1,92 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useI18n } from '#imports'
+import { computed } from 'vue';
+import { useI18n } from '#imports';
 
-type Category = { name: string; techs: string[] }
+type Category = { name: string; techs: string[] };
 
 type Props = {
-  eyebrow?: string
-  categories?: Category[]
-}
+  eyebrow?: string;
+  categories?: Category[];
+};
 const props = withDefaults(defineProps<Props>(), {
   eyebrow: undefined,
-  categories: undefined
-})
+  categories: undefined,
+});
 
-const { t, tm, te } = useI18n({ useScope: 'global' })
+const { t, tm, te } = useI18n({ useScope: 'global' });
 
 /** Заголовок-эйброу */
-const eyebrow = computed(() =>
-  props.eyebrow ?? t('about.stack.eyebrow', 'Технологии и инструменты')
-)
+const eyebrow = computed(
+  () => props.eyebrow ?? t('about.stack.eyebrow', 'Технологии и инструменты')
+);
 
 /** Преобразование произвольного значения в массив строк */
 const toStringArray = (v: unknown): string[] => {
-  if (Array.isArray(v)) return v.filter((x): x is string => typeof x === 'string')
+  if (Array.isArray(v)) return v.filter((x): x is string => typeof x === 'string');
   if (v && typeof v === 'object') {
-    const obj = v as Record<string, unknown>
+    const obj = v as Record<string, unknown>;
     return Object.keys(obj)
       .sort((a, b) => Number(a) - Number(b))
-      .map(k => obj[k])
-      .filter((x): x is string => typeof x === 'string')
+      .map((k) => obj[k])
+      .filter((x): x is string => typeof x === 'string');
   }
-  return []
-}
+  return [];
+};
 
 /** Читаем категории из props или из i18n (без массивов) */
 const categories = computed<Category[]>(() => {
-  if (props.categories?.length) return props.categories
+  if (props.categories?.length) return props.categories;
 
   // 1) Попробуем через tm('stack.categories') — вернёт объект с "0","1",...
-  const raw = tm('abour.stack.categories') as unknown
+  const raw = tm('abour.stack.categories') as unknown;
   const fromRaw = (): Category[] => {
     if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
-      const obj = raw as Record<string, any>
+      const obj = raw as Record<string, any>;
       return Object.keys(obj)
         .sort((a, b) => Number(a) - Number(b))
-        .map(k => {
-          const item = obj[k] || {}
-          const name = typeof item.name === 'string' ? item.name : ''
-          const techs = toStringArray(item.techs)
-          return name ? { name, techs } : null
+        .map((k) => {
+          const item = obj[k] || {};
+          const name = typeof item.name === 'string' ? item.name : '';
+          const techs = toStringArray(item.techs);
+          return name ? { name, techs } : null;
         })
-        .filter((x): x is Category => !!x && !!x.name)
+        .filter((x): x is Category => !!x && !!x.name);
     }
-    return []
-  }
+    return [];
+  };
 
-  const list = fromRaw()
-  if (list.length) return list
+  const list = fromRaw();
+  if (list.length) return list;
 
   // 2) Фолбэк: ручной обход по индексам stack.categories.{i}.*
-  const out: Category[] = []
+  const out: Category[] = [];
   for (let i = 0; i < 100; i++) {
-    const base = `about.stack.categories.${i}`
-    const hasName = te(`${base}.name`)
+    const base = `about.stack.categories.${i}`;
+    const hasName = te(`${base}.name`);
     if (!hasName) {
-      if (i > 0) break
-      continue
+      if (i > 0) break;
+      continue;
     }
-    const name = t(`${base}.name`) as string
+    const name = t(`${base}.name`) as string;
 
     // Техи могут быть массивом или объектом с "0","1",...
     // Сначала попробуем как список по индексам:
-    const techs: string[] = []
+    const techs: string[] = [];
     for (let j = 0; j < 200; j++) {
-      const tk = `${base}.techs.${j}`
-      if (te(tk)) techs.push(t(tk) as string)
-      else if (j > 0) break
+      const tk = `${base}.techs.${j}`;
+      if (te(tk)) techs.push(t(tk) as string);
+      else if (j > 0) break;
     }
     // Если по индексам не нашли — пробуем tm:
     if (!techs.length) {
-      const maybe = tm(`${base}.techs`) as unknown
-      techs.push(...toStringArray(maybe))
+      const maybe = tm(`${base}.techs`) as unknown;
+      techs.push(...toStringArray(maybe));
     }
 
-    out.push({ name, techs })
+    out.push({ name, techs });
   }
-  return out
-})
+  return out;
+});
 </script>
 
 <template>

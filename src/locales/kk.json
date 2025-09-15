@@ -87,14 +87,7 @@
           "title": "Чукотка сайты",
           "org": "NEFU",
           "description": "Vue + Go. ~2 айда жылдам релиз. Gin бэкенд, PostgreSQL дерекқоры",
-          "tags": [
-            "TypeScript",
-            "Vue",
-            "Go",
-            "Gin",
-            "Nginx",
-            "CI/CD"
-          ]
+          "tags": ["TypeScript", "Vue", "Go", "Gin", "Nginx", "CI/CD"]
         },
         {
           "kind": "work",
@@ -124,11 +117,7 @@
           "title": "ChildrenOfAsiaBot",
           "org": "NEFU",
           "description": "RU ↔ EN тапсырмалар, тесттер және сабақтар ChildrenOfAsia іс-шарасы үшін. OPENAI API арқылы автокесу. Екі тілді UX.",
-          "tags": [
-            "Aiogram",
-            "OPENAI API",
-            "Python"
-          ]
+          "tags": ["Aiogram", "OPENAI API", "Python"]
         },
         {
           "kind": "work",
@@ -139,12 +128,7 @@
           "org": "ЖШС \"СИВИГ\"",
           "role": "Fullstack Developer (контракт)",
           "description": "Алыс Солтүстік үшін тұрғын үй брондау қызметі: Next.js-те SSR, авторизация/тапсырыстар, Docker.",
-          "tags": [
-            "Next.js",
-            "SSR",
-            "Docker",
-            "Python"
-          ]
+          "tags": ["Next.js", "SSR", "Docker", "Python"]
         },
         {
           "kind": "project",
@@ -154,11 +138,7 @@
           "title": "Зообақ боты",
           "org": "ЖШС \"Орто Дойду\"",
           "description": "Ақпарат / навигация және админ панелі. ~1 айда әзірленген және тапсырылған.",
-          "tags": [
-            "Aiogram",
-            "Python",
-            "Telegram"
-          ]
+          "tags": ["Aiogram", "Python", "Telegram"]
         },
         {
           "kind": "work",
@@ -169,11 +149,7 @@
           "org": "inDriver SparkLab",
           "role": "Frontend Developer",
           "description": "R&D бөлімінде InRoad өнімімен жұмыс. Компоненттер, интеграциялар, функцияларды жеткізу.",
-          "tags": [
-            "Vue",
-            "TypeScript",
-            "Google Maps API"
-          ]
+          "tags": ["Vue", "TypeScript", "Google Maps API"]
         },
         {
           "kind": "project",
@@ -183,11 +159,7 @@
           "title": "Paralar",
           "org": "NEFU",
           "description": "СВФУ кесте боты — жылдам іздеу, шынымен қолдану, студент уақытын үнемдеу.",
-          "tags": [
-            "Telegram",
-            "Aiogram",
-            "Python"
-          ]
+          "tags": ["Telegram", "Aiogram", "Python"]
         }
       ]
     },
@@ -196,11 +168,7 @@
       "categories": {
         "0": {
           "name": "Core",
-          "techs": [
-            "TypeScript",
-            "Go",
-            "Python"
-          ]
+          "techs": ["TypeScript", "Go", "Python"]
         },
         "1": {
           "name": "Frontend",
@@ -215,45 +183,23 @@
         },
         "2": {
           "name": "Backend",
-          "techs": [
-            "Go",
-            "NodeJS",
-            "Prisma",
-            "Gorm",
-            "Gin",
-            "Express"
-          ]
+          "techs": ["Go", "NodeJS", "Prisma", "Gorm", "Gin", "Express"]
         },
         "3": {
           "name": "API / Желілік өзара әрекеттестік",
-          "techs": [
-            "REST",
-            "GraphQL",
-            "WebSockets"
-          ]
+          "techs": ["REST", "GraphQL", "WebSockets"]
         },
         "4": {
           "name": "Инфрақұрылым",
-          "techs": [
-            "Vite",
-            "Webpack",
-            "Docker"
-          ]
+          "techs": ["Vite", "Webpack", "Docker"]
         },
         "5": {
           "name": "Карталар",
-          "techs": [
-            "Google Maps API",
-            "Yandex Maps API"
-          ]
+          "techs": ["Google Maps API", "Yandex Maps API"]
         },
         "6": {
           "name": "UI / Сапа",
-          "techs": [
-            "Дизайн-жүйелері",
-            "ESLint/Prettier",
-            "Vitest/Playwright"
-          ]
+          "techs": ["Дизайн-жүйелері", "ESLint/Prettier", "Vitest/Playwright"]
         }
       }
     },

@@ -1,51 +1,57 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { defineStore } from 'pinia';
+import { computed, ref } from 'vue';
 
 export const useUiStore = defineStore('ui', () => {
-  const bp = 768
+  const bp = 768;
 
-  const isMobile = ref(false)
-  const isMenuOpen = ref(false)
-  const headerElevated = ref(false)
+  const isMobile = ref(false);
+  const isMenuOpen = ref(false);
+  const headerElevated = ref(false);
 
-  const canUseDOM = () => typeof window !== 'undefined'
+  const canUseDOM = () => typeof window !== 'undefined';
 
   const recalcIsMobile = () => {
-    if (!canUseDOM()) return
-    isMobile.value = window.innerWidth < bp
-  }
+    if (!canUseDOM()) return;
+    isMobile.value = window.innerWidth < bp;
+  };
 
   const recalcHeaderElevated = () => {
-    if (!canUseDOM()) return
-    headerElevated.value = window.scrollY > 8
-  }
+    if (!canUseDOM()) return;
+    headerElevated.value = window.scrollY > 8;
+  };
 
-  const openMenu = () => { isMenuOpen.value = true }
-  const closeMenu = () => { isMenuOpen.value = false }
-  const toggleMenu = () => { isMenuOpen.value = !isMenuOpen.value }
-  
+  const openMenu = () => {
+    isMenuOpen.value = true;
+  };
+  const closeMenu = () => {
+    isMenuOpen.value = false;
+  };
+  const toggleMenu = () => {
+    isMenuOpen.value = !isMenuOpen.value;
+  };
+
   const bindListeners = () => {
-    if (!canUseDOM()) return () => {}
-    recalcIsMobile()
-    recalcHeaderElevated()
+    if (!canUseDOM()) return () => {};
+    recalcIsMobile();
+    recalcHeaderElevated();
 
     const onResize = () => {
-      const wasMobile = isMobile.value
-      recalcIsMobile()
-      if (wasMobile && !isMobile.value) closeMenu()
-    }
-    const onScroll = () => recalcHeaderElevated()
+      const wasMobile = isMobile.value;
+      recalcIsMobile();
+      if (wasMobile && !isMobile.value) closeMenu();
+    };
+    const onScroll = () => recalcHeaderElevated();
 
-    window.addEventListener('resize', onResize, { passive: true })
-    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onResize, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('resize', onResize)
-      window.removeEventListener('scroll', onScroll)
-    }
-  }
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('scroll', onScroll);
+    };
+  };
 
-  const isDesktop = computed(() => !isMobile.value)
+  const isDesktop = computed(() => !isMobile.value);
 
   return {
     isMobile,
@@ -56,6 +62,6 @@ export const useUiStore = defineStore('ui', () => {
     openMenu,
     closeMenu,
     toggleMenu,
-    bindListeners
-  }
-})
+    bindListeners,
+  };
+});

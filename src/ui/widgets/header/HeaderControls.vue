@@ -1,48 +1,51 @@
 <script setup lang="ts">
-import { computed, nextTick } from 'vue'
-import { useI18n, useRoute, useRouter, useSwitchLocalePath } from '#imports'
-import { useUiStore } from '~/entities/stores/ui'
+import { computed, nextTick } from 'vue';
+import { useI18n, useRoute, useRouter, useSwitchLocalePath } from '#imports';
+import { useUiStore } from '~/entities/stores/ui';
 
-const ui = useUiStore()
-const { t, locale, availableLocales } = useI18n()
-const route = useRoute()
-const router = useRouter()
-const switchLocalePath = useSwitchLocalePath()
+const ui = useUiStore();
+const { t, locale, availableLocales } = useI18n();
+const route = useRoute();
+const router = useRouter();
+const switchLocalePath = useSwitchLocalePath();
 
 const localeCodes = computed<string[]>(() =>
-  (availableLocales as any[]).map(
-    (l: any) => (typeof l === 'string' ? l : l.code)
-  ).filter(Boolean)
-)
+  (availableLocales as any[]).map((l: any) => (typeof l === 'string' ? l : l.code)).filter(Boolean)
+);
 
 const flag = (code: string): string =>
-  ({ ru: '🇷🇺', kk: '🇰🇿', es: '🇪🇸', pt: '🇧🇷', fr: '🇫🇷', de: '🇩🇪', en: '🇺🇸' } as Record<string, string>)[code] || '🇺🇸'
+  (
+    ({ ru: '🇷🇺', kk: '🇰🇿', es: '🇪🇸', pt: '🇧🇷', fr: '🇫🇷', de: '🇩🇪', en: '🇺🇸' }) as Record<
+      string,
+      string
+    >
+  )[code] || '🇺🇸';
 
 const changeLocale = async (lc: string) => {
-  if (!lc || lc === locale.value) return
+  if (!lc || lc === locale.value) return;
 
-  const target = switchLocalePath(lc)
-  const to = target || (lc === 'en' ? '/' : `/${lc}`)
+  const target = switchLocalePath(lc);
+  const to = target || (lc === 'en' ? '/' : `/${lc}`);
 
-  await router.replace(to)
-}
+  await router.replace(to);
+};
 
-type MenuItem = { label: string; value: string; onSelect: () => void }
+type MenuItem = { label: string; value: string; onSelect: () => void };
 const items = computed<MenuItem[][]>(() => [
-  localeCodes.value.map(lc => ({
+  localeCodes.value.map((lc) => ({
     label: lc.toUpperCase(),
     value: lc,
-    onSelect: () => changeLocale(lc)
-  }))
-])
+    onSelect: () => changeLocale(lc),
+  })),
+]);
 
 const toggleMenu = async () => {
-  ui.toggleMenu()
+  ui.toggleMenu();
   if (ui.isMenuOpen) {
-    await nextTick()
-    document.querySelector<HTMLAnchorElement>('#mobile-nav a')?.focus()
+    await nextTick();
+    document.querySelector<HTMLAnchorElement>('#mobile-nav a')?.focus();
   }
-}
+};
 </script>
 
 <template>

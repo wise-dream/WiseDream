@@ -1,46 +1,46 @@
 <!-- src/ui/sections/HelpCards.vue -->
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useI18n } from '#imports'
+import { computed } from 'vue';
+import { useI18n } from '#imports';
 
-type CardItem = { title: string; description: string }
+type CardItem = { title: string; description: string };
 
 type Props = {
-  eyebrow?: string
-  cards?: CardItem[]
-}
+  eyebrow?: string;
+  cards?: CardItem[];
+};
 const props = withDefaults(defineProps<Props>(), {
   eyebrow: undefined,
-  cards: undefined
-})
+  cards: undefined,
+});
 
-const { t, te } = useI18n({ useScope: 'global' })
+const { t, te } = useI18n({ useScope: 'global' });
 
-const eyebrow = computed(() => props.eyebrow ?? t('about.help.eyebrow'))
+const eyebrow = computed(() => props.eyebrow ?? t('about.help.eyebrow'));
 
 const cards = computed<CardItem[]>(() => {
-  if (props.cards?.length) return props.cards
+  if (props.cards?.length) return props.cards;
 
-  const out: CardItem[] = []
+  const out: CardItem[] = [];
   for (let i = 0; i < 50; i++) {
-    const tKey = `about.help.cards.${i}.title`
-    const dKey = `about.help.cards.${i}.description`
+    const tKey = `about.help.cards.${i}.title`;
+    const dKey = `about.help.cards.${i}.description`;
     if (te(tKey) && te(dKey)) {
-      out.push({ title: t(tKey), description: t(dKey) })
+      out.push({ title: t(tKey), description: t(dKey) });
     } else if (i > 0) {
-      break
+      break;
     }
   }
-  return out
-})
+  return out;
+});
 
 const icons = [
   'heroicons:puzzle-piece',
   'heroicons:chart-bar',
   'heroicons:map',
-  'heroicons:arrow-path'
-]
-const pickIcon = (i: number) => icons[i % icons.length]
+  'heroicons:arrow-path',
+];
+const pickIcon = (i: number) => icons[i % icons.length];
 </script>
 
 <template>

@@ -1,31 +1,42 @@
 <!-- src/ui/sections/AboutHero.vue -->
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { computed } from 'vue'
-import { useLocalePath } from '#imports'
-const { t } = useI18n()
-const localePath = useLocalePath()
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useLocalePath } from '#imports';
 
-type Align = 'left' | 'center' | 'right'
-interface Metric { label: string; value: string }
-interface Chip { label: string }
-interface Social { icon: string; to: string; ariaLabel?: string; external?: boolean }
+const { t } = useI18n();
+const localePath = useLocalePath();
+
+type Align = 'left' | 'center' | 'right';
+interface Metric {
+  label: string;
+  value: string;
+}
+interface Chip {
+  label: string;
+}
+interface Social {
+  icon: string;
+  to: string;
+  ariaLabel?: string;
+  external?: boolean;
+}
 
 interface Props {
-  eyebrow?: string
-  title?: string
-  subtitle?: string
-  chips?: Chip[]
-  metrics?: Metric[]
-  socials?: Social[]
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  chips?: Chip[];
+  metrics?: Metric[];
+  socials?: Social[];
 
-  primaryTo?: string
-  primaryLabel?: string
-  secondaryTo?: string
-  secondaryLabel?: string
+  primaryTo?: string;
+  primaryLabel?: string;
+  secondaryTo?: string;
+  secondaryLabel?: string;
 
-  align?: Align
-  dense?: boolean
+  align?: Align;
+  dense?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   eyebrow: undefined,
@@ -39,19 +50,37 @@ const props = withDefaults(defineProps<Props>(), {
   secondaryTo: '/contact',
   secondaryLabel: undefined,
   align: 'center',
-  dense: false
-})
+  dense: false,
+});
 
-const eyebrow = computed(() => props.eyebrow ?? t('about.hero.eyebrow', 'About me'))
-const title = computed(() => props.title ?? t('about.hero.title', "Hi! I'm Kamil — I ship fast interfaces and small tools people actually use."))
-const subtitle = computed(() => props.subtitle ?? t('about.hero.subtitle', 'Vue/React, design systems, SSR, maps, Telegram bots — plus a bit of Go.'))
-const primaryLabel = computed(() => props.primaryLabel ?? t('about.hero.primaryButton', 'Projects'))
-const secondaryLabel = computed(() => props.secondaryLabel ?? t('about.hero.secondaryButton', 'Contact'))
+const eyebrow = computed(() => props.eyebrow ?? t('about.hero.eyebrow', 'About me'));
+const title = computed(
+  () =>
+    props.title ??
+    t(
+      'about.hero.title',
+      "Hi! I'm Kamil — I ship fast interfaces and small tools people actually use."
+    )
+);
+const subtitle = computed(
+  () =>
+    props.subtitle ??
+    t(
+      'about.hero.subtitle',
+      'Vue/React, design systems, SSR, maps, Telegram bots — plus a bit of Go.'
+    )
+);
+const primaryLabel = computed(
+  () => props.primaryLabel ?? t('about.hero.primaryButton', 'Projects')
+);
+const secondaryLabel = computed(
+  () => props.secondaryLabel ?? t('about.hero.secondaryButton', 'Contact')
+);
 
 const wrapperClasses = computed(() => [
-  props.align === 'center' ? 'text-center' : (props.align === 'right' ? 'text-right' : 'text-left'),
-  'max-w-4xl mx-auto'
-])
+  props.align === 'center' ? 'text-center' : props.align === 'right' ? 'text-right' : 'text-left',
+  'max-w-4xl mx-auto',
+]);
 </script>
 
 <template>

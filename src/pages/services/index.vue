@@ -66,48 +66,48 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useI18n, useLocalePath } from '#imports'
+import { computed } from 'vue';
+import { useI18n, useLocalePath } from '#imports';
 
-type Service = { title: string; desc: string; bullets: string[] }
+type Service = { title: string; desc: string; bullets: string[] };
 
-const { t, te } = useI18n({ useScope: 'global' })
-const localePath = useLocalePath?.()
-const localize = (p: string) => (typeof localePath === 'function' ? localePath(p) : p)
+const { t, te } = useI18n({ useScope: 'global' });
+const localePath = useLocalePath?.();
+const localize = (p: string) => (typeof localePath === 'function' ? localePath(p) : p);
 
 const readService = (i: number): Service | null => {
-  const base = `services.cards.${i}`
-  if (!te(`${base}.title`) || !te(`${base}.desc`)) return null
-  const bullets: string[] = []
+  const base = `services.cards.${i}`;
+  if (!te(`${base}.title`) || !te(`${base}.desc`)) return null;
+  const bullets: string[] = [];
   for (let j = 0; j < 24; j++) {
-    const key = `${base}.bullets.${j}`
-    if (te(key)) bullets.push(t(key) as string)
-    else if (j > 0) break
+    const key = `${base}.bullets.${j}`;
+    if (te(key)) bullets.push(t(key) as string);
+    else if (j > 0) break;
   }
   return {
     title: t(`${base}.title`) as string,
     desc: t(`${base}.desc`) as string,
-    bullets
-  }
-}
+    bullets,
+  };
+};
 
 const services = computed<Service[]>(() => {
-  const out: Service[] = []
+  const out: Service[] = [];
   for (let i = 0; i < 12; i++) {
-    const s = readService(i)
-    if (s) out.push(s)
-    else if (i > 0) break
+    const s = readService(i);
+    if (s) out.push(s);
+    else if (i > 0) break;
   }
-  return out
-})
+  return out;
+});
 
 const icons = [
   'heroicons:chat-bubble-left-right', // Telegram-боты
-  'heroicons:building-office-2',      // Сайт под ключ
-  'heroicons:wrench-screwdriver',     // Верстка / фронтенд
-  'heroicons:bolt'                    // PWA/SSR/перф
-]
-const iconFor = (i: number) => icons[i % icons.length]
+  'heroicons:building-office-2', // Сайт под ключ
+  'heroicons:wrench-screwdriver', // Верстка / фронтенд
+  'heroicons:bolt', // PWA/SSR/перф
+];
+const iconFor = (i: number) => icons[i % icons.length];
 </script>
 
 <style scoped>

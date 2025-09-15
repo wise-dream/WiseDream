@@ -3,65 +3,28 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "#app": [
-        ".nuxt/app"
-      ],
-      "#app/*": [
-        ".nuxt/app/*"
-      ],
-      "#app/nuxt": [
-        ".nuxt/app/nuxt.d.ts",
-        ".nuxt/app/nuxt.ts",
-        ".nuxt/app/nuxt"
-      ],
-      "#build/*": [
-        ".nuxt/*"
-      ],
-      "#imports": [
-        ".nuxt/imports.d.ts",
-        ".nuxt/imports"
-      ],
+      "#app": [".nuxt/app"],
+      "#app/*": [".nuxt/app/*"],
+      "#app/nuxt": [".nuxt/app/nuxt.d.ts", ".nuxt/app/nuxt.ts", ".nuxt/app/nuxt"],
+      "#build/*": [".nuxt/*"],
+      "#imports": [".nuxt/imports.d.ts", ".nuxt/imports"],
       // === ТВОИ АЛИАСЫ ===
-      "@/*": [
-        "src/*"
-      ],
-      "~/*": [
-        "src/*"
-      ],
-      "@app/*": [
-        "src/app/*"
-      ],
-      "@views/*": [
-        "src/views/*"
-      ],
-      "@entities/*": [
-        "src/entities/*"
-      ],
-      "@ui/*": [
-        "src/ui/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ]
+      "@/*": ["src/*"],
+      "~/*": ["src/*"],
+      "@app/*": ["src/app/*"],
+      "@views/*": ["src/views/*"],
+      "@entities/*": ["src/entities/*"],
+      "@ui/*": ["src/ui/*"],
+      "@utils/*": ["src/utils/*"]
     },
     // опционально, но помогает с node-типами в DevTools и плагинах
-    "types": [
-      "@nuxtjs/i18n",
-      "vite/client",
-      "node"
-    ],
+    "types": ["@nuxtjs/i18n", "vite/client", "node"],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
   // чтобы tsc не сканил node_modules
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   // гарантируем, что .vue тоже попадают под типчек
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.vue"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.vue"]
 }

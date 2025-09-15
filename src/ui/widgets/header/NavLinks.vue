@@ -1,9 +1,9 @@
 <script setup lang="ts">
 defineProps<{
-  links: Array<{ label: string; to: string }>
-  vertical?: boolean
-  ariaLabel?: string
-}>()
+  links: Array<{ label: string; to: string }>;
+  vertical?: boolean;
+  ariaLabel?: string;
+}>();
 </script>
 
 <template>

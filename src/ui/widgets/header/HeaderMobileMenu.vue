@@ -1,64 +1,68 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useI18n, useRoute, useRouter, useSwitchLocalePath, useLocalePath } from '#imports'
-import AppButton from '~/ui/atoms/AppButton.vue'
+import { computed } from 'vue';
+import { useI18n, useLocalePath, useRoute, useRouter, useSwitchLocalePath } from '#imports';
+import AppButton from '~/ui/atoms/AppButton.vue';
 
 const props = defineProps<{
-  id?: string
-  open: boolean
-  links: Array<{ label: string; to: string }>
-}>()
+  id?: string;
+  open: boolean;
+  links: Array<{ label: string; to: string }>;
+}>();
 
-const emit = defineEmits<{
-  (e: 'close'): void
-}>()
+const emit = defineEmits<(e: 'close') => void>();
 
-const { t, locale, availableLocales } = useI18n()
-const route = useRoute()
-const router = useRouter()
-const switchLocalePath = useSwitchLocalePath()
-const localePath = useLocalePath()
+const { t, locale, availableLocales } = useI18n();
+const route = useRoute();
+const router = useRouter();
+const switchLocalePath = useSwitchLocalePath();
+const localePath = useLocalePath();
 
-const currentPath = computed(() => route.path)
+const currentPath = computed(() => route.path);
 
 const items = computed(() =>
-  (availableLocales as string[]).map(lc => ({
+  (availableLocales as string[]).map((lc) => ({
     label: lc.toUpperCase(),
-    value: lc
+    value: lc,
   }))
-)
+);
 
 const flag = (code: string): string => {
   switch (code) {
-    case 'ru': return '🇷🇺'
-    case 'kk': return '🇰🇿'
-    case 'es': return '🇪🇸'
-    case 'pt': return '🇧🇷'
-    case 'fr': return '🇫🇷'
-    case 'de': return '🇩🇪'
-    case 'en':
-    default:   return '🇺🇸'
+    case 'ru':
+      return '🇷🇺';
+    case 'kk':
+      return '🇰🇿';
+    case 'es':
+      return '🇪🇸';
+    case 'pt':
+      return '🇧🇷';
+    case 'fr':
+      return '🇫🇷';
+    case 'de':
+      return '🇩🇪';
+    default:
+      return '🇺🇸';
   }
-}
+};
 
 const setLocale = async (payload: unknown) => {
   const lc =
     typeof payload === 'string'
       ? payload
       : payload && typeof payload === 'object' && 'value' in (payload as any)
-      ? (payload as any).value as string
-      : undefined
-  if (!lc || lc === locale.value) return
+        ? ((payload as any).value as string)
+        : undefined;
+  if (!lc || lc === locale.value) return;
 
-  const target = switchLocalePath(lc)
+  const target = switchLocalePath(lc);
   if (target) {
-    await router.push(target)
+    await router.push(target);
   } else {
-    locale.value = lc
-    await router.push(`/${lc}`)
+    locale.value = lc;
+    await router.push(`/${lc}`);
   }
-  emit('close')
-}
+  emit('close');
+};
 </script>
 
 <template>

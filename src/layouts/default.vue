@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import Header from '@/ui/widgets/header/Header.vue'
-import Container from '@/ui/layout/Container.vue'
-import LifeBackground from '@/ui/widgets/animations/LifeBackground.vue'
-import { useEasterToast } from '@/utils/composables/useEasterToast'
-useEasterToast()
+import Container from '@/ui/layout/Container.vue';
+import LifeBackground from '@/ui/widgets/animations/LifeBackground.vue';
+import Header from '@/ui/widgets/header/Header.vue';
+import { useEasterToast } from '@/utils/composables/useEasterToast';
+
+useEasterToast();
 </script>
 
 <template>

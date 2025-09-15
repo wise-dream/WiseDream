@@ -1,40 +1,46 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, watch } from 'vue'
-import { useI18n, useLocalePath, useRoute } from '#imports'
-import { useUiStore } from '~/entities/stores/ui'
+import { computed, onBeforeUnmount, onMounted, watch } from 'vue';
+import { useI18n, useLocalePath, useRoute } from '#imports';
+import { useUiStore } from '~/entities/stores/ui';
+import AppButton from '~/ui/atoms/AppButton.vue';
+import BrandMark from '~/ui/atoms/BrandMark.vue';
+import Container from '~/ui/layout/Container.vue';
+import HeaderControls from './HeaderControls.vue';
+import HeaderMobileMenu from './HeaderMobileMenu.vue';
+import NavLinks from './NavLinks.vue';
 
-import Container from '~/ui/layout/Container.vue'
-import BrandMark from '~/ui/atoms/BrandMark.vue'
-import AppButton from '~/ui/atoms/AppButton.vue'
-import NavLinks from './NavLinks.vue'
-import HeaderMobileMenu from './HeaderMobileMenu.vue'
-import HeaderControls from './HeaderControls.vue'
-
-const { t } = useI18n()
-const localePath = useLocalePath()
-const route = useRoute()
-const ui = useUiStore()
+const { t } = useI18n();
+const localePath = useLocalePath();
+const route = useRoute();
+const ui = useUiStore();
 
 const links = computed(() => [
-  { label: t('nav.about'),    to: localePath('/about') },
+  { label: t('nav.about'), to: localePath('/about') },
   { label: t('nav.projects'), to: localePath('/projects') },
   { label: t('nav.services'), to: localePath('/services') },
-])
+]);
 
 const mobileLinks = computed(() => [
-  { label: t('nav.about'),    to: localePath('/about') },
+  { label: t('nav.about'), to: localePath('/about') },
   { label: t('nav.projects'), to: localePath('/projects') },
   { label: t('nav.services'), to: localePath('/services') },
   { label: t('nav.contact'), to: localePath('/contact') },
-])
+]);
 
-const mobileId = 'mobile-nav'
+const mobileId = 'mobile-nav';
 
-let unbind: null | (() => void) = null
-onMounted(() => { unbind = ui.bindListeners?.() ?? null })
-onBeforeUnmount(() => { unbind?.() })
+let unbind: null | (() => void) = null;
+onMounted(() => {
+  unbind = ui.bindListeners?.() ?? null;
+});
+onBeforeUnmount(() => {
+  unbind?.();
+});
 
-watch(() => route.fullPath, () => ui.closeMenu())
+watch(
+  () => route.fullPath,
+  () => ui.closeMenu()
+);
 </script>
 
 <template>

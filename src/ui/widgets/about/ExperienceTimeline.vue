@@ -1,152 +1,174 @@
 <!-- src/ui/sections/ExperienceTimeline.vue -->
 <script setup lang="ts">
-import { computed, ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import { useI18n } from '#imports'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
+import { useI18n } from '#imports';
 
-type Kind = 'work' | 'project'
+type Kind = 'work' | 'project';
 type Entry = {
-  kind: Kind
-  start: string
-  end?: string
-  period?: string
-  title: string
-  role?: string
-  org?: string
-  description: string
-  tags?: string[]
-  link?: string
-}
+  kind: Kind;
+  start: string;
+  end?: string;
+  period?: string;
+  title: string;
+  role?: string;
+  org?: string;
+  description: string;
+  tags?: string[];
+  link?: string;
+};
 
 type Props = {
-  eyebrow?: string
-  items?: Entry[]
-}
+  eyebrow?: string;
+  items?: Entry[];
+};
 const props = withDefaults(defineProps<Props>(), {
   eyebrow: undefined,
-  items: undefined
-})
+  items: undefined,
+});
 
-const { t, te } = useI18n({ useScope: 'global' })
-const eyebrow = computed(() => props.eyebrow ?? t('about.experience.eyebrow'))
+const { t, te } = useI18n({ useScope: 'global' });
+const eyebrow = computed(() => props.eyebrow ?? t('about.experience.eyebrow'));
 
 const parseDate = (v?: string) => {
-  if (!v) return new Date('1970-01-01')
-  const [y, m] = v.split('-')
-  const yy = Number(y)
-  const mm = m ? Number(m) - 1 : 0
-  return new Date(yy, isFinite(mm) ? mm : 0, 1)
-}
+  if (!v) return new Date('1970-01-01');
+  const [y, m] = v.split('-');
+  const yy = Number(y);
+  const mm = m ? Number(m) - 1 : 0;
+  return new Date(yy, Number.isFinite(mm) ? mm : 0, 1);
+};
 
 // Читаем список из локалей без массивов: about.experience.timeline.{i}.*
 const entries = computed<Entry[]>(() => {
   if (Array.isArray(props.items) && props.items.length) {
-    return [...props.items].sort((a, b) => +parseDate(b.start) - +parseDate(a.start))
+    return [...props.items].sort((a, b) => +parseDate(b.start) - +parseDate(a.start));
   }
-  const base = 'about.experience.timeline'
-  const out: Entry[] = []
+  const base = 'about.experience.timeline';
+  const out: Entry[] = [];
   for (let i = 0; i < 100; i++) {
-    const k = `${base}.${i}`
+    const k = `${base}.${i}`;
     if (!te(`${k}.kind`) || !te(`${k}.title`) || !te(`${k}.start`)) {
-      if (i > 0) break
-      continue
+      if (i > 0) break;
+      continue;
     }
-    const kind = (t(`${k}.kind`) as string) as Kind
-    const title = t(`${k}.title`) as string
-    const start = t(`${k}.start`) as string
-    const end = te(`${k}.end`) ? (t(`${k}.end`) as string) : undefined
-    const period = te(`${k}.period`) ? (t(`${k}.period`) as string) : undefined
-    const role = te(`${k}.role`) ? (t(`${k}.role`) as string) : undefined
-    const org = te(`${k}.org`) ? (t(`${k}.org`) as string) : undefined
-    const description = te(`${k}.description`) ? (t(`${k}.description`) as string) : ''
-    const tags: string[] = []
+    const kind = t(`${k}.kind`) as string as Kind;
+    const title = t(`${k}.title`) as string;
+    const start = t(`${k}.start`) as string;
+    const end = te(`${k}.end`) ? (t(`${k}.end`) as string) : undefined;
+    const period = te(`${k}.period`) ? (t(`${k}.period`) as string) : undefined;
+    const role = te(`${k}.role`) ? (t(`${k}.role`) as string) : undefined;
+    const org = te(`${k}.org`) ? (t(`${k}.org`) as string) : undefined;
+    const description = te(`${k}.description`) ? (t(`${k}.description`) as string) : '';
+    const tags: string[] = [];
     for (let j = 0; j < 50; j++) {
-      const tk = `${k}.tags.${j}`
-      if (te(tk)) tags.push(t(tk) as string)
-      else if (j > 0) break
+      const tk = `${k}.tags.${j}`;
+      if (te(tk)) tags.push(t(tk) as string);
+      else if (j > 0) break;
     }
-    out.push({ kind, title, start, end, period, role, org, description, tags: tags.length ? tags : undefined })
+    out.push({
+      kind,
+      title,
+      start,
+      end,
+      period,
+      role,
+      org,
+      description,
+      tags: tags.length ? tags : undefined,
+    });
   }
-  return out.sort((a, b) => +parseDate(b.start) - +parseDate(a.start))
-})
+  return out.sort((a, b) => +parseDate(b.start) - +parseDate(a.start));
+});
 
-const activeIndex = ref(0)
-const listRef = ref<HTMLElement | null>(null)
-let io: IntersectionObserver | null = null
+const activeIndex = ref(0);
+const listRef = ref<HTMLElement | null>(null);
+let io: IntersectionObserver | null = null;
 
 // refs на карточки для скролла
-const itemRefs: Record<number, HTMLElement | null> = {}
-const setItemRef = (el: HTMLElement | null, i: number) => { itemRefs[i] = el }
+const itemRefs: Record<number, HTMLElement | null> = {};
+const setItemRef = (el: HTMLElement | null, i: number) => {
+  itemRefs[i] = el;
+};
 
 // какая карточка «вспыхивает» после клика
-const flashIndex = ref<number | null>(null)
+const flashIndex = ref<number | null>(null);
 
 const getHeaderOffset = () => {
-  const v = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 64
-  return v + 20 // зазор
-}
+  const v =
+    parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h'), 10) || 64;
+  return v + 20; // зазор
+};
 
 // Перезапуск анимации подсветки (в т.ч. при повторном клике по той же дате)
 const flashCard = async (i: number) => {
   if (flashIndex.value === i) {
-    flashIndex.value = null
-    await nextTick()
+    flashIndex.value = null;
+    await nextTick();
   }
-  flashIndex.value = i
-  window.setTimeout(() => { if (flashIndex.value === i) flashIndex.value = null }, 1100)
-}
+  flashIndex.value = i;
+  window.setTimeout(() => {
+    if (flashIndex.value === i) flashIndex.value = null;
+  }, 1100);
+};
 
 const scrollToIndex = async (i: number) => {
-  await nextTick()
-  const el = itemRefs[i]
-  if (!el) return
+  await nextTick();
+  const el = itemRefs[i];
+  if (!el) return;
 
   // мгновенно подсветим активный пункт в aside
-  activeIndex.value = i
+  activeIndex.value = i;
 
   // запустим подсветку карточки (перезапускаем анимацию)
-  flashCard(i)
+  flashCard(i);
 
-  const top = el.getBoundingClientRect().top + window.scrollY - getHeaderOffset()
-  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
-}
+  const top = el.getBoundingClientRect().top + window.scrollY - getHeaderOffset();
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+};
 
 const buildObserver = () => {
-  const rootMargin = `-${getHeaderOffset()}px 0px -90% 0px`
+  const rootMargin = `-${getHeaderOffset()}px 0px -90% 0px`;
   io = new IntersectionObserver(
     (ents) => {
       // выбираем самый верхний видимый элемент (минимальный data-index среди пересекающихся)
-      const visible: number[] = []
+      const visible: number[] = [];
       for (const e of ents) {
         if (e.isIntersecting) {
-          const idx = Number(e.target.getAttribute('data-index') || -1)
-          if (idx >= 0) visible.push(idx)
+          const idx = Number(e.target.getAttribute('data-index') || -1);
+          if (idx >= 0) visible.push(idx);
         }
       }
       if (visible.length) {
-        activeIndex.value = Math.min(...visible)
+        activeIndex.value = Math.min(...visible);
       }
     },
     // область пересечения — «полоса» у верхней кромки вьюпорта,
     // сдвинутая вниз на высоту шапки; нижняя граница сильно урезана.
     { root: null, rootMargin, threshold: 0 }
-  )
-}
+  );
+};
 
 onMounted(() => {
-  const el = listRef.value
-  if (!el) return
-  buildObserver()
-  el.querySelectorAll<HTMLElement>('[data-index]').forEach(n => io?.observe(n))
-})
+  const el = listRef.value;
+  if (!el) return;
+  buildObserver();
+  el.querySelectorAll<HTMLElement>('[data-index]').forEach((n) => {
+    io?.observe(n);
+  });
+});
 
-onBeforeUnmount(() => { io?.disconnect(); io = null })
+onBeforeUnmount(() => {
+  io?.disconnect();
+  io = null;
+});
 
 const badgeText = (k: Kind) =>
-  k === 'work' ? t('about.experience.badge.work', 'Работа') : t('about.experience.badge.project', 'Проект')
+  k === 'work'
+    ? t('about.experience.badge.work', 'Работа')
+    : t('about.experience.badge.project', 'Проект');
 const badgeClass = (k: Kind) =>
   k === 'work'
     ? 'bg-emerald-500/18 text-emerald-300 border-emerald-400/30'
-    : 'bg-sky-500/18 text-sky-300 border-sky-400/30'
+    : 'bg-sky-500/18 text-sky-300 border-sky-400/30';
 </script>
 
 <template>

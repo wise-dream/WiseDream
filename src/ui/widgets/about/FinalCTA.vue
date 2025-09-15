@@ -1,31 +1,31 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { computed } from 'vue'
-import { useLocalePath } from '#imports'
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useLocalePath } from '#imports';
 
-const { t } = useI18n()
-const localePath = useLocalePath()
+const { t } = useI18n();
+const localePath = useLocalePath();
 
 interface Props {
-  title?: string
-  writeButton?: string
-  resumeButton?: string
-  projectsButton?: string
-  note?: string
+  title?: string;
+  writeButton?: string;
+  resumeButton?: string;
+  projectsButton?: string;
+  note?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
   title: undefined,
   writeButton: undefined,
   resumeButton: undefined,
   projectsButton: undefined,
-  note: undefined
-})
+  note: undefined,
+});
 
-const title = computed(() => props.title || t('about.cta.title'))
-const writeButton = computed(() => props.writeButton || t('about.cta.writeButton'))
-const resumeButton = computed(() => props.resumeButton || t('about.cta.resumeButton'))
-const projectsButton = computed(() => props.projectsButton || t('about.cta.projectsButton'))
-const note = computed(() => props.note || t('about.cta.note'))
+const title = computed(() => props.title || t('about.cta.title'));
+const writeButton = computed(() => props.writeButton || t('about.cta.writeButton'));
+const resumeButton = computed(() => props.resumeButton || t('about.cta.resumeButton'));
+const projectsButton = computed(() => props.projectsButton || t('about.cta.projectsButton'));
+const note = computed(() => props.note || t('about.cta.note'));
 </script>
 
 <template>

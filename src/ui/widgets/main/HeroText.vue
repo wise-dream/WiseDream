@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { computed } from 'vue'
-import { useLocalePath } from '#imports'
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useLocalePath } from '#imports';
 
-const { t } = useI18n()
-const localePath = useLocalePath()
+const { t } = useI18n();
+const localePath = useLocalePath();
 
 interface Props {
-  greeting?: string
-  name?: string
-  subtitle?: string
-  primaryTo?: string
-  primaryLabel?: string
-  secondaryTo?: string
-  secondaryLabel?: string
-  align?: 'left' | 'center' | 'right'
-  shimmer?: boolean
-  dense?: boolean
+  greeting?: string;
+  name?: string;
+  subtitle?: string;
+  primaryTo?: string;
+  primaryLabel?: string;
+  secondaryTo?: string;
+  secondaryLabel?: string;
+  align?: 'left' | 'center' | 'right';
+  shimmer?: boolean;
+  dense?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   greeting: undefined,
@@ -28,17 +28,17 @@ const props = withDefaults(defineProps<Props>(), {
   secondaryLabel: undefined,
   align: 'center',
   shimmer: true,
-  dense: false
-})
+  dense: false,
+});
 
-const greeting = computed(() => props.greeting || t('hero.greeting'))
-const name = computed(() => props.name || t('hero.name'))
-const subtitle = computed(() => props.subtitle || t('hero.subtitle'))
-const primaryLabel = computed(() => props.primaryLabel || t('hero.primaryButton'))
-const secondaryLabel = computed(() => props.secondaryLabel || t('hero.secondaryButton'))
+const greeting = computed(() => props.greeting || t('hero.greeting'));
+const name = computed(() => props.name || t('hero.name'));
+const subtitle = computed(() => props.subtitle || t('hero.subtitle'));
+const primaryLabel = computed(() => props.primaryLabel || t('hero.primaryButton'));
+const secondaryLabel = computed(() => props.secondaryLabel || t('hero.secondaryButton'));
 
-const GITHUB_URL = 'https://github.com/wise-dream'
-const LINKEDIN_URL = 'https://www.linkedin.com/in/vinokurov-kamil/'
+const GITHUB_URL = 'https://github.com/wise-dream';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/vinokurov-kamil/';
 </script>
 
 <template>

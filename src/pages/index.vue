@@ -1,7 +1,7 @@
 <!-- src/pages/index.vue -->
 <script setup lang="ts">
-import Sphere from '~/ui/widgets/animations/Sphere.vue'
-import HeroText from '~/ui/widgets/main/HeroText.vue'
+import Sphere from '~/ui/widgets/animations/Sphere.vue';
+import HeroText from '~/ui/widgets/main/HeroText.vue';
 </script>
 
 <template>
