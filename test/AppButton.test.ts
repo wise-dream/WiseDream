@@ -28,7 +28,7 @@ describe('AppButton', () => {
 
     // Проверяем, что компонент смонтирован
     expect(wrapper.exists()).toBe(true);
-    
+
     // Проверяем, что пропсы переданы в компонент
     expect(wrapper.props('color')).toBe('primary');
     expect(wrapper.props('variant')).toBe('outline');
@@ -61,7 +61,7 @@ describe('AppButton', () => {
 
     // Проверяем, что компонент смонтирован с атрибутами
     expect(wrapper.exists()).toBe(true);
-    
+
     // Проверяем, что атрибуты переданы в HTML
     const html = wrapper.html();
     expect(html).toContain('data-testid="test-button"');
@@ -88,10 +88,10 @@ describe('AppButton', () => {
 
     // Проверяем, что компонент смонтирован
     expect(wrapper.exists()).toBe(true);
-    
+
     // Тестируем клик
     await wrapper.trigger('click');
-    
+
     // Проверяем, что компонент все еще существует после клика
     expect(wrapper.exists()).toBe(true);
   });
