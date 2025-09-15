@@ -161,7 +161,7 @@ export default defineNuxtConfig({
         defaults: { changefreq: 'weekly', priority: 0.7 },
 
         // Явный список страниц (можно расширять)
-        urls: ['/', '/about', '/projects', '/contacts'].map((loc) => ({ loc })),
+        urls: ['/', '/about', '/projects', '/contact'].map((loc) => ({ loc })), 
       },
     ],
 
