@@ -25,3 +25,7 @@ logs
 
 # Biome cache
 .biome
+
+# Test coverage
+coverage/
+.nyc_output/
