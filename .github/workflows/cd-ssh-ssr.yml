@@ -1,0 +1,85 @@
+name: CD — Nuxt SSR to VPS (releases + symlink)
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      INSTALL_CMD: "npm ci"
+      BUILD_CMD: "npm run build"
+      OUTPUT_DIR: ".output"
+
+      RELEASES_DIR: "/var/www/WiseDream/releases"
+      CURRENT_LINK: "/var/www/WiseDream/current"
+      SERVICE_NAME: "wisedream"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps
+        run: $INSTALL_CMD
+
+      - name: Build (Nuxt SSR)
+        run: $BUILD_CMD
+
+      - name: Ensure .output exists
+        run: |
+          [ -d "$OUTPUT_DIR/server" ] || (echo "Nuxt SSR build not found in $OUTPUT_DIR/server"; exit 1)
+
+      - name: Prepare release name
+        id: rel
+        run: echo "name=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
+
+      - name: Create release dir on server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            mkdir -p ${{ env.RELEASES_DIR }}/${{ steps.rel.outputs.name }}
+
+      - name: Upload .output via rsync
+        uses: burnett01/rsync-deployments@6.0.0
+        with:
+          switches: -az --delete
+          path: ${{ env.OUTPUT_DIR }}/
+          remote_path: ${{ env.RELEASES_DIR }}/${{ steps.rel.outputs.name }}/.output/
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_KEY }}
+          remote_port: ${{ secrets.SSH_PORT }}
+
+      - name: Switch symlink atomically
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            ln -sfn ${{ env.RELEASES_DIR }}/${{ steps.rel.outputs.name }} ${{ env.CURRENT_LINK }}
+
+      - name: Restart service
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: |
+            systemctl restart ${{ env.SERVICE_NAME }}
+            systemctl --no-pager --full status ${{ env.SERVICE_NAME }} || true

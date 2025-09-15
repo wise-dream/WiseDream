@@ -30,7 +30,7 @@ export default defineNuxtConfig({
         { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#0b0f1a' },
 
         // Базовое описание
-        { name: 'description', content: 'Портфолио WiseDream: веб-проекты, интерфейсы и боты.' },
+        { name: 'description', content: 'WiseDream - портфолио Винокурова Камила. Frontend/Full-stack разработчик. Веб-приложения, интерфейсы, Telegram-боты. Vue, React, Nuxt, SSR.' },
 
         // Индексация
         { name: 'robots', content: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' },
@@ -39,14 +39,14 @@ export default defineNuxtConfig({
         { property: 'og:site_name', content: 'WiseDream' },
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: 'WiseDream' },
-        { property: 'og:description', content: 'Портфолио WiseDream: веб-проекты, интерфейсы и боты.' },
+        { property: 'og:description', content: 'WiseDream - портфолио Винокурова Камила. Frontend/Full-stack разработчик. Веб-приложения, интерфейсы, Telegram-боты.' },
         { property: 'og:url', content: SITE_URL },
         { property: 'og:image', content: `${SITE_URL}/og/default.png` },
 
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'WiseDream' },
-        { name: 'twitter:description', content: 'Портфолио WiseDream: веб-проекты, интерфейсы и боты.' },
+        { name: 'twitter:description', content: 'WiseDream - портфолио Винокурова Камила. Frontend/Full-stack разработчик. Веб-приложения, интерфейсы, Telegram-боты.' },
         { name: 'twitter:image', content: `${SITE_URL}/og/default.png` }
       ],
       link: [
@@ -59,8 +59,29 @@ export default defineNuxtConfig({
         { rel: 'canonical', href: SITE_URL }
       ],
       script: [
-        // оставил под JSON-LD (если понадобится — заполни innerHTML)
-        { type: 'application/ld+json' }
+        // JSON-LD структурированные данные
+        { 
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "Винокуров Камил",
+            "alternateName": "WiseDream",
+            "jobTitle": "Frontend / Full-stack разработчик",
+            "description": "Создаю быстрые, чистые и практичные веб-приложения, интерфейсы и Telegram-боты",
+            "url": SITE_URL,
+            "sameAs": [
+              "https://github.com/wise-dream",
+              "https://www.linkedin.com/in/vinokurov-kamil/",
+              "https://t.me/Wise_Dream"
+            ],
+            "knowsAbout": ["Vue.js", "React", "Nuxt.js", "TypeScript", "Telegram Bots", "Web Development", "Frontend Development"],
+            "worksFor": {
+              "@type": "Organization",
+              "name": "WiseDream"
+            }
+          })
+        }
       ]
     }
   },
