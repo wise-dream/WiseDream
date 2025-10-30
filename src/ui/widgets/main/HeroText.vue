@@ -54,7 +54,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/vinokurov-kamil/';
       id="hero-title"
       class="mask-reveal font-semibold tracking-tight"
       :class="[props.dense ? 'text-xl md:text-3xl' : 'text-2xl md:text-4xl']"
-      style="--d:120ms"
+      style="--d:0ms"
     >
       <span class="opacity-90">{{ greeting }}&nbsp;</span>
       <span
@@ -68,7 +68,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/vinokurov-kamil/';
     <p
       class="mask-reveal mt-3 md:mt-4 opacity-90"
       :class="[props.dense ? 'text-sm' : 'text-sm md:text-base/7']"
-      style="--d:260ms"
+      style="--d:80ms"
     >
       {{ subtitle }}
     </p>
@@ -77,7 +77,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/vinokurov-kamil/';
       v-if="primaryLabel || secondaryLabel"
       class="mask-reveal mt-5 md:mt-6 flex items-center gap-6 h-[80px]"
       :class="[props.align === 'center' ? 'justify-center' : '']"
-      style="--d:380ms"
+      style="--d:160ms"
     >
         <NuxtLink
           :to="GITHUB_URL"

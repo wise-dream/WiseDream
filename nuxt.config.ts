@@ -67,8 +67,13 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        // Preconnect для быстрой загрузки шрифтов (раннее установление соединения)
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' as any },
+        // DNS prefetch для дополнительной оптимизации
+        { rel: 'dns-prefetch', href: 'https://fonts.googleapis.com' },
+        { rel: 'dns-prefetch', href: 'https://fonts.gstatic.com' },
+        // Шрифты с display=swap для немедленного отображения текста
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
@@ -161,7 +166,7 @@ export default defineNuxtConfig({
         defaults: { changefreq: 'weekly', priority: 0.7 },
 
         // Явный список страниц (можно расширять)
-        urls: ['/', '/about', '/projects', '/contact'].map((loc) => ({ loc })), 
+        urls: ['/', '/about', '/projects', '/contact'].map((loc) => ({ loc })),
       },
     ],
 
