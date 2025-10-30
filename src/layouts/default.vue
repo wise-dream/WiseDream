@@ -6,7 +6,6 @@ import { useEasterToast } from '@/utils/composables/useEasterToast';
 
 useEasterToast();
 
-// Ленивая загрузка LifeBackground для улучшения LCP
 const LifeBackground = defineAsyncComponent({
   loader: () => import('@/ui/widgets/animations/LifeBackground.vue'),
   delay: 0,
@@ -14,12 +13,9 @@ const LifeBackground = defineAsyncComponent({
   suspensible: false,
 });
 
-// Отложенная инициализация фона - загружается после критического контента
 const shouldShowBackground = ref(false);
 
 onMounted(() => {
-  // Используем requestIdleCallback для загрузки после завершения критических задач
-  // или fallback на setTimeout
   if ('requestIdleCallback' in window) {
     requestIdleCallback(
       () => {
@@ -28,7 +24,6 @@ onMounted(() => {
       { timeout: 2000 }
     );
   } else {
-    // Fallback для браузеров без requestIdleCallback
     setTimeout(() => {
       shouldShowBackground.value = true;
     }, 1500);
@@ -41,7 +36,6 @@ onMounted(() => {
     <Header />
 
     <main id="content" class="py-8 md:py-10">
-      <!-- LifeBackground загружается отложенно для улучшения LCP -->
       <LifeBackground
         v-if="shouldShowBackground"
         :fixed="true"

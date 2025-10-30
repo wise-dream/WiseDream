@@ -1,5 +1,3 @@
-// nuxt.config.ts
-
 import tailwind from '@tailwindcss/vite';
 import { defineNuxtConfig } from 'nuxt/config';
 import { resolve } from 'pathe';
@@ -10,7 +8,6 @@ export default defineNuxtConfig({
   srcDir: 'src',
   ssr: true,
 
-  // Делаем URL сайта доступным для модулей и на билде/рантайме
   runtimeConfig: {
     public: {
       siteUrl: SITE_URL,
@@ -19,71 +16,55 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: { lang: 'en' }, // можно менять по i18n на страницах
+      htmlAttrs: { lang: 'en' },
       title: 'WiseDream',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-
-        // Цветовые схемы
         { name: 'color-scheme', content: 'light dark' },
         { name: 'theme-color', media: '(prefers-color-scheme: light)', content: '#ffffff' },
         { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#0b0f1a' },
-
-        // Базовое описание
         {
           name: 'description',
           content:
-            'WiseDream - портфолио Винокурова Камила. Frontend/Full-stack разработчик. Веб-приложения, интерфейсы, Telegram-боты. Vue, React, Nuxt, SSR.',
+            'Привет! Я Камил - Frontend/Full-stack разработчик. Создаю быстрые и современные веб-приложения, красивые интерфейсы и Telegram-боты. Работаю с Vue, React, Nuxt и TypeScript.',
         },
-
-        // Индексация
         {
           name: 'robots',
           content: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
         },
-
-        // Open Graph (дефолты на весь сайт)
         { property: 'og:site_name', content: 'WiseDream' },
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: 'WiseDream' },
         {
           property: 'og:description',
           content:
-            'WiseDream - портфолио Винокурова Камила. Frontend/Full-stack разработчик. Веб-приложения, интерфейсы, Telegram-боты.',
+            'Привет! Я Камил - Frontend/Full-stack разработчик. Создаю быстрые и современные веб-приложения, красивые интерфейсы и Telegram-боты.',
         },
         { property: 'og:url', content: SITE_URL },
         { property: 'og:image', content: `${SITE_URL}/og/default.png` },
-
-        // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'WiseDream' },
         {
           name: 'twitter:description',
           content:
-            'WiseDream - портфолио Винокурова Камила. Frontend/Full-stack разработчик. Веб-приложения, интерфейсы, Telegram-боты.',
+            'Привет! Я Камил - Frontend/Full-stack разработчик. Создаю быстрые и современные веб-приложения, красивые интерфейсы и Telegram-боты.',
         },
         { name: 'twitter:image', content: `${SITE_URL}/og/default.png` },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-        // Preconnect для быстрой загрузки шрифтов (раннее установление соединения)
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' as any },
-        // DNS prefetch для дополнительной оптимизации
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
         { rel: 'dns-prefetch', href: 'https://fonts.googleapis.com' },
         { rel: 'dns-prefetch', href: 'https://fonts.gstatic.com' },
-        // Шрифты с display=swap для немедленного отображения текста
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
         },
-
-        // Каноникал по умолчанию (на страницах можно переопределять useHead/useSeoMeta)
         { rel: 'canonical', href: SITE_URL },
       ],
       script: [
-        // JSON-LD структурированные данные
         {
           type: 'application/ld+json',
           innerHTML: JSON.stringify({
@@ -124,8 +105,6 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/icon',
     '@nuxt/ui',
-
-    // i18n — НЕ трогаю langDir
     [
       '@nuxtjs/i18n',
       {
@@ -151,26 +130,17 @@ export default defineNuxtConfig({
         },
       },
     ],
-
-    // Sitemap
     [
       '@nuxtjs/sitemap',
       {
-        // Берёт URL из runtimeConfig.public.siteUrl, но держим и здесь «на всякий»
         siteUrl: SITE_URL,
-
-        // Один общий sitemap по /sitemap.xml
         autoI18n: false,
-        xsl: false, // убираем лишний динамический маршрут XSL
+        xsl: false,
         autoLastmod: true,
         defaults: { changefreq: 'weekly', priority: 0.7 },
-
-        // Явный список страниц (можно расширять)
         urls: ['/', '/about', '/projects', '/contact'].map((loc) => ({ loc })),
       },
     ],
-
-    // Robots.txt → указывает на /sitemap.xml
     [
       '@nuxtjs/robots',
       {
@@ -179,11 +149,9 @@ export default defineNuxtConfig({
         rules: [{ userAgent: '*', allow: '/' }],
       },
     ],
-
     '@nuxt/image',
   ],
 
-  // ————— проектное
   css: ['~/assets/css/tailwind.css'],
 
   alias: {
@@ -215,7 +183,6 @@ export default defineNuxtConfig({
 
   nitro: { sourceMap: false },
 
-  // Пререндерим sitemap и robots, чтобы отдаваться как статика
   routeRules: {
     '/sitemap.xml': { prerender: true },
     '/robots.txt': { prerender: true },
