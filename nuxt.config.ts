@@ -54,14 +54,12 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        // Preconnect для Google Fonts - устанавливаем соединение заранее
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
         { rel: 'dns-prefetch', href: 'https://fonts.googleapis.com' },
         { rel: 'dns-prefetch', href: 'https://fonts.gstatic.com' },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap',
-        },
+        // Шрифты загружаются асинхронно через плагин fonts-loader.client.ts
         { rel: 'canonical', href: SITE_URL },
       ],
       script: [
@@ -176,12 +174,35 @@ export default defineNuxtConfig({
   sourcemap: false,
 
   vite: {
-    build: { sourcemap: false },
+    build: {
+      sourcemap: false,
+      cssCodeSplit: true, // Разделение CSS на чанки для уменьшения размера блокирующего CSS
+      rollupOptions: {
+        output: {
+          // Оптимизация размера чанков
+          manualChunks: {
+            'vendor-vue': ['vue', 'vue-router'],
+          },
+        },
+      },
+    },
     logLevel: 'error',
     plugins: [tailwind()],
+    css: {
+      // Минификация CSS
+      devSourcemap: false,
+    },
   },
 
-  nitro: { sourceMap: false },
+  nitro: {
+    sourceMap: false,
+    // Оптимизация сборки
+    minify: true,
+    compressPublicAssets: {
+      gzip: true,
+      brotli: true,
+    },
+  },
 
   routeRules: {
     '/sitemap.xml': { prerender: true },
