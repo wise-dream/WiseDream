@@ -36,16 +36,18 @@ onMounted(() => {
     <Header />
 
     <main id="content" class="py-8 md:py-10">
-      <LifeBackground
-        v-if="shouldShowBackground"
-        :fixed="true"
-        :z-index="-1"
-        color-mode="hue"
-        :blur-px="6"
-        :fps="12"
-        :opacity="0.10"
-        :cell-size="20"
-      />
+      <ClientOnly>
+        <LifeBackground
+          v-if="shouldShowBackground"
+          :fixed="true"
+          :z-index="-1"
+          color-mode="hue"
+          :blur-px="6"
+          :fps="12"
+          :opacity="0.10"
+          :cell-size="20"
+        />
+      </ClientOnly>
       <Container>
         <slot />
       </Container>

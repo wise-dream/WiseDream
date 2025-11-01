@@ -78,7 +78,7 @@
           target="_blank"
           rel="noopener"
           :aria-label="t('contact.socials.githubAria')"
-          class="social-btn shadow-[0_0_25px_6px_rgba(34,211,238,.28)]"
+          class="social-btn shadow-[0_0_12px_6px_rgba(34,211,238,.28)]"
         >
           <Icon name="mdi:github" class="size-8" />
         </NuxtLink>
@@ -89,7 +89,7 @@
           target="_blank"
           rel="noopener"
           :aria-label="t('contact.socials.linkedinAria')"
-          class="social-btn shadow-[0_0_25px_6px_rgba(34,211,238,.28)]"
+          class="social-btn shadow-[0_0_12px_6px_rgba(34,211,238,.28)]"
         >
           <Icon name="mdi:linkedin" class="size-8" />
         </NuxtLink>

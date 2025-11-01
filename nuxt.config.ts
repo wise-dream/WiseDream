@@ -136,7 +136,7 @@ export default defineNuxtConfig({
         xsl: false,
         autoLastmod: true,
         defaults: { changefreq: 'weekly', priority: 0.7 },
-        urls: ['/', '/about', '/projects', '/contact'].map((loc) => ({ loc })),
+        urls: ['/', '/about', '/projects', '/services', '/contact'].map((loc) => ({ loc })),
       },
     ],
     [
@@ -177,14 +177,6 @@ export default defineNuxtConfig({
     build: {
       sourcemap: false,
       cssCodeSplit: true, // Разделение CSS на чанки для уменьшения размера блокирующего CSS
-      rollupOptions: {
-        output: {
-          // Оптимизация размера чанков
-          manualChunks: {
-            'vendor-vue': ['vue', 'vue-router'],
-          },
-        },
-      },
     },
     logLevel: 'error',
     plugins: [tailwind()],
@@ -205,7 +197,16 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    '/': { prerender: true, isr: 3600 },
+    '/about': { prerender: true },
+    '/projects': { prerender: true },
+    '/services': { prerender: true },
+    '/contact': { prerender: true },
     '/sitemap.xml': { prerender: true },
     '/robots.txt': { prerender: true },
+  },
+
+  experimental: {
+    payloadExtraction: false, // Быстрее загрузка, меньше запросов
   },
 });
